@@ -24,12 +24,15 @@ body {
   padding-right: env(safe-area-inset-right);
 }
 html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg1); /* your gradient background */
   overflow: hidden;
-  touch-action: none; 
-  font-family: Inter, system-ui, Arial, sans-serif;
-  background: var(--bg1);
-  -webkit-font-smoothing: antialiased;
 }
 
 body {
@@ -43,6 +46,7 @@ body {
   width: calc(100% - 5%);   /* leaves 10% margin left + right */
   max-width: 90;          /* prevent growing too big on desktop */
   height: 100%;
+  min-height:90%;
   margin: 0 auto;            /* centers it */
   display: flex;
   flex-direction: column;
@@ -72,7 +76,7 @@ body {
 } 
 
 #innerBoard {
-  width: min(90vw, 90vh, 90%);  /* fit inside viewport and parent */
+  width: min(95vw, 95vh, 95%);  /* fit inside viewport and parent */
   aspect-ratio: 1 / 1;          /* always square */
   display: flex;
   align-items: center;
@@ -84,10 +88,10 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
+  width: 80%;
   max-width: 600px;
   margin: 1vh 0;
-  padding: 0.5em 1em;
+  padding: 0.5em 2em;
   background: #f8f8f8;
   border-radius: 10px;
   font-size: 1rem;
@@ -99,6 +103,7 @@ body {
 #gameInfo span {
   flex: 1;
   text-align: center;
+  padding: 0 1em;
 }
 
 #gameInfo {
@@ -116,20 +121,22 @@ body {
   z-index:20;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;  /* space things evenly */
+  justify-content: flex-start;  /* space things evenly */
   
   width: 90vw;        /* consistent width */
   max-width: 600px;   /* keeps it neat on desktop */
-  height: 90vh;       /* always fits on screen */
+  height: auto;      /* always fits on screen */
   max-height: 100vh;
+  min-height: 505px;
   position: relative;
   border-radius: 3%;
   background: #fff;
   box-shadow: 0 12px 30px rgba(0,0,0,0.2),
               0 -6px 14px rgba(255,255,255,0.8);
-  padding: 1vh;
   box-sizing: border-box;
   overflow: hidden;   /* prevent scrollbars popping in */
+  padding: 1em; 
+  gap: 1em;
 }
 
 
@@ -146,22 +153,21 @@ body {
 }*/
 
 #innerBoard {
-  margin-top: 3vh;  
-  flex: 1 1 auto;
-  aspect-ratio: 1 / 1;
-  max-width: 100%;
-  max-height: 70vh; /* keep space for player */
+  flex: 0 0 auto;
+  aspect-ratio: 8 / 8;
+  max-width: 90vw;
+  max-height: 65vh; /* keep space for player */
 
 /*Grid Attributes*/
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(8, 1fr);
-  gap: 0.75%;
-  padding: 2%;
+  gap: 0%;
+  padding: 1%;
   
   
   border-radius: 3%;
-  background: #e6e6e6;
+  background: #a79393;
   box-shadow: inset 0 2.5% 5% rgba(0,0,0,0.18),
               inset 0 -1.5% 3% rgba(0,0,0,0.08);
   box-sizing: border-box;
@@ -305,8 +311,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--pink);
-  color: white;
+  background-color: white; /* var(--pink)*/
+  color: var(--pink);
   cursor: pointer;
   transition: transform 0.2s ease;
 }
@@ -391,7 +397,7 @@ body {
   -ms-touch-action: none;
   -webkit-user-select: none;
   touch-action: none;
-  background: white;
+  background: none;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -403,8 +409,8 @@ body {
   transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 .tileImg {
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 90%;
   border-radius: 10px;
   object-fit: cover;
 }
@@ -467,9 +473,9 @@ body {
 }
 
 
-#timerDisplay { left: 5%; }
-#scoreDisplay { right: 5%; }
-#movesDisplay { left: 5%; }
+#timerDisplay { left: 8%; }
+#scoreDisplay { right: 8%; }
+#movesDisplay { left: 8%; }
 #modeDisplay { left: 50%; transform: translateX(-50%); }
 
 .time-warning {
@@ -542,10 +548,6 @@ body {
     max-height: 120px;     /* smaller max height for mobile */
   }
 }
-
-#youtubePlayerContainer { display:none; height:0; width:0; overflow:hidden; }
-#youtubePlayer { border:none; width:100%; height:100%; }
-
 
 .progress {
   height: clamp(6px, 0.6vw, 8px);
@@ -670,26 +672,25 @@ body {
 }
 
 .dropup .dropdown-menu.show {
-  width: 120% !important;  /* make it wider */
+  width: 120% !important; 
   max-width: none;
 }
 
 .dropup .dropdown-toggle {
-  width: 90%;
-  max-width: 90%;
   display: flex;
-  border-radius: 0.5em;
-  justify-content: center;   /* center the title */
-  align-items: center;
-  position: relative;        /* needed for absolute arrow */
-  margin: 0 auto;            /* center button inside container */
-  text-align: center;
+  justify-content: center;  
+  align-items: center;      
+  gap: 0.3em;                
+  width: 40px;              
+  height: 30px;             
+  padding: 0;               
 }
 
+/* Override Bootstrap's arrow positioning */
 .dropup .dropdown-toggle::after {
-  position: absolute;
-  right: 12px;               /* push arrow to far right */
-  margin-left: 0;            /* reset Bootstrap default */
+  position: static; 
+  margin-left: 0;   
+  transform: none;
 }
 
 /* Pink border for the dropup button */
@@ -713,9 +714,9 @@ body {
 #songTitle {
     width: 80%;                           
     max-width: 400px;                     
-    font-size: clamp(12px, 1.5vw, 16px);  
+    font-size: clamp(12px, 1.5vw, 13px);  
     margin: 1% auto 0 auto;
-    text-align: left;
+    text-align: center;
     border-radius: 0.5em;
     background: #f5f5f5;
     height: 3em;                
@@ -725,9 +726,9 @@ body {
     white-space: nowrap;                   
     text-overflow: ellipsis;
 
-	display: flex;             /* flexbox centering */
-    align-items: center;       /* vertical center */
-    justify-content: left;   /* horizontal center */	
+	display: flex;            
+    align-items: center;       
+    justify-content: center;   
 }
 
 .music-controls {
@@ -741,11 +742,11 @@ body {
 /*/* ---------------- Music Player Grid ---------------- */
 .music-player-grid {
   display: grid;
-  grid-template-columns: 1fr auto 1fr; /* left, center, right */
+  grid-template-columns: 1fr auto 1fr; 
   align-items: center;
   gap: 1rem;
   width: 100%;
-  max-width: 580px; /* optional max width */
+  max-width: 580px; 
   max-height: 150px;
   margin: 0 auto;
   box-sizing: border-box;
@@ -775,16 +776,14 @@ body {
 /* RIGHT: Volume */
 .music-player-right {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-end; 
   align-items: center;
-  gap: 0.5rem;
-  flex-wrap: nowrap;
-  min-width: 0;
+  width: 100%; /* so it has full horizontal space to push */
 }
 
 /* Make volume slider stretch a bit */
 .music-player-right input[type="range"] {
-  width: clamp(80px, 20vmin, 150px);  /* min, relative, max */
+  width: clamp(80px, 20vmin, 150px);  
 }
 
 /* =========================
@@ -814,7 +813,7 @@ body {
 }
 
 .modal-dialog {
-  margin: auto;              /* centers horizontally */
+  margin: auto;              
 }
 
 /* =========================
@@ -1133,17 +1132,285 @@ body {
 }
 
 #youtubePlayerContainer {
+  border-radius: 20px;
   width: 100%;
-  height: 120px;     /* force visible height */
+  height: 50vmin;     /* force visible height */
   max-height: 120px;
   background: #000;  /* black background like a video frame */
+  overflow: hidden;
 }
 
-#youtubePlayer, 
+#youtubePlayer,
 #youtubePlayer iframe {
   width: 100% !important;
   height: 100% !important;
   display: block;
+  pointer-events: none;
+}
+
+.videoWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 400px;   /* optional cap */
+  margin: 0 auto;     /* center horizontally */
+  border-radius: 20px;
+  overflow: hidden;   /* clip rounded corners */
+
+  /* maintain aspect ratio like YouTube */
+  aspect-ratio: 16 / 9;
+  background: #000;   /* black frame when no video */
+}
+
+#videoPlayer {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* fill the box */
+  display: block;
+  pointer-events: none;
+  border-radius: 20px; /* redundant but safe */
+}
+#divider {
+  display: flex;
+  align-items: flex-start;   /* align tops */
+  gap: 0.5rem;                 /* space between video + player */
+  width: 95%;
+  max-width: 95%;
+}
+
+/* Modal styling */
+.leaderboard-modal {
+  border-radius: 20px;
+  background: linear-gradient(145deg, #ffe6f0, #fff);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+/* Title */
+.leaderboard-modal .modal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ff4da6; /* candy pink */
+}
+
+/* Tabs */
+.leaderboard-tabs .nav-link {
+  border: none;
+  padding: 0px 16px;
+  font-weight: 600;
+  color: #ff4da6;
+  background: #f8f8f8;
+  transition: all 0.2s ease;
+}
+.leaderboard-tabs .nav-link.active {
+  background: #ff4da6;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Leaderboard table */
+.leaderboard-table {
+  border-radius: 0 0 20px 20px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+}
+.leaderboard-table table thead {
+  background: #ffb3d9;
+  color: white;
+  font-weight: 600;
+}
+.leaderboard-table table tbody tr:nth-child(1) {
+  background: #fff0f5; /* gold highlight vibe */
+  font-weight: bold;
+}
+.leaderboard-table table tbody tr:nth-child(2) {
+  background: #f5f5f5;
+}
+.leaderboard-table table tbody tr:nth-child(3) {
+  background: #fafafa;
+}
+
+#leaderboardModal .modal-dialog {
+  max-width: 70vh !important;
+}
+
+#leaderboardModal .modal-body {
+  max-height: 70vh;         /* 70% of viewport */
+  overflow-y: auto;         /* enable scrolling */
+  padding: 0;               /* optional: tighter fit */
+}
+
+#leaderboardTabContent {
+  max-width: 100% !important;
+  max-height: 100%;
+  margin: 0 auto;                /* horizontal center */
+  justify-content: center;       /* center children horizontally */
+  align-items: center;           /* center children vertically */
+  flex-direction: column;        /* stack tab panes vertically */
+}
+
+.leaderboard-table table {
+  width: 100%;
+  table-layout: fixed; /* ensures columns share space evenly */
+  height: 80%;
+}
+.leaderboard-table thead th {
+  position: sticky;
+  background: #ff4da6;     /* match theme */
+  color: white;
+  z-index: 2;
+}
+
+/* Compact rank 1–10 */
+.leaderboard-table tbody tr:nth-child(-n+10) td {
+  padding: 8px 6px;     /* smaller height */
+  font-size: 1rem;    /* smaller text */
+}
+
+/* Keep header readable */
+.leaderboard-table thead th {
+  padding: 8px 10px;
+  font-size: 0.9rem;
+}
+
+
+/* 📱 On small screens: more compact */
+@media (max-width: 576px) {
+  .leaderboard-table {
+    max-height: 90vh;      /* smaller slice of screen */
+  }
+  .leaderboard-table table th,
+  .leaderboard-table table td {
+    padding: 6px;          /* tighter rows */
+    font-size: 0.9rem;     /* smaller text */
+  }
+}
+
+/* Adjust columns for clarity */
+.leaderboard-table th,
+.leaderboard-table td {
+  text-align: center;
+  padding: 12px;
+  word-wrap: break-word;
+}
+
+/* Give "Player" column more space */
+.leaderboard-table th:nth-child(2),
+.leaderboard-table td:nth-child(2) {
+  width: 50%;
+}
+
+/* 🥇 1st place name (gold glow) */
+.leaderboard-table tbody tr:nth-child(1) td:nth-child(2) {
+  font-weight: 800;
+  color: #ffbe10; /* gold text */
+  animation: playerGlowGold 2s infinite alternate;
+}
+@keyframes playerGlowGold {
+  from { text-shadow: 1px 1px 3px #000, 0 0 5px #ffd700, 0 0 10px #ffd700; }
+  to   { text-shadow: 1px 1px 3px #000, 0 0 15px #ffec8b, 0 0 30px #ffd700; }
+}
+
+/* 🥈 2nd place name (skyblue) */
+.leaderboard-table tbody tr:nth-child(2) td:nth-child(2) {
+  font-weight: 800;
+  color: white; /* light skyblue text */
+  animation: playerGlowSilver 2s infinite alternate;
+}
+@keyframes playerGlowSilver {
+  from { text-shadow: 1px 1px 3px #000, 0 0 5px #87ceeb, 0 0 10px #87ceeb; }
+  to   { text-shadow: 1px 1px 3px #000, 0 0 15px #b0e0e6, 0 0 30px #87ceeb; }
+}
+
+/* 🥉 3rd place name (light brown/bronze) */
+.leaderboard-table tbody tr:nth-child(3) td:nth-child(2) {
+  font-weight: 800;
+  color: #eca251; /* light brown text */
+  animation: playerGlowBronze 2s infinite alternate;
+}
+@keyframes playerGlowBronze {
+  from { text-shadow: 1px 1px 3px #000, 0 0 5px #cd853f, 0 0 10px #cd853f; }
+  to   { text-shadow: 1px 1px 3px #000, 0 0 15px #deb887, 0 0 30px #cd853f; }
+}
+
+/* 🥇 Gold */
+.leaderboard-table tbody tr:nth-child(2) {
+  background: linear-gradient(
+    270deg,
+    #fff8dc,
+    #ffd700,
+    #fff8dc
+  );
+  background-size: 400% 400%;
+  animation: waveGold 2s ease infinite;
+}
+@keyframes waveGold {
+  0%   { background-position: 0% 50%; box-shadow: 0 0 5px #ffd700; }
+  50%  { background-position: 100% 50%; box-shadow: 0 0 30px #ffd700; }
+  100% { background-position: 0% 50%; box-shadow: 0 0 5px #ffd700; }
+}
+
+/* 🥈 Silver (light skyblue) */
+.leaderboard-table tbody tr:nth-child(3) {
+  background: linear-gradient(
+    270deg,
+    #e0f7ff,
+    #87ceeb,
+    #e0f7ff
+  );
+  background-size: 400% 400%;
+  animation: waveSilver 2s ease infinite;
+}
+@keyframes waveSilver {
+  0%   { background-position: 0% 50%; box-shadow: 0 0 5px #87ceeb; }
+  50%  { background-position: 100% 50%; box-shadow: 0 0 30px #87ceeb; }
+  100% { background-position: 0% 50%; box-shadow: 0 0 5px #87ceeb; }
+}
+
+/* 🥉 Bronze */
+.leaderboard-table tbody tr:nth-child(4) {
+  background: linear-gradient(
+    270deg,
+    #fdf5e6,
+    #cd7f32,
+    #fdf5e6
+  );
+  background-size: 400% 400%;
+  animation: waveBronze 2s ease infinite;
+}
+@keyframes waveBronze {
+  0%   { background-position: 0% 50%; box-shadow: 0 0 5px #cd7f32; }
+  50%  { background-position: 100% 50%; box-shadow: 0 0 30px #cd7f32; }
+  100% { background-position: 0% 50%; box-shadow: 0 0 5px #cd7f32; }
+}
+
+
+#playerNameModalLabel {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ff4da6; /* candy pink */
+}
+
+#yunhameme {
+  position: relative;
+}
+
+#yunhameme::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.2; /* adjust transparency */
+  pointer-events: none; /* allow table interaction */
+  z-index: 2;
+  border-radius: 0 0 20px 20px;
+}
+
+#yunhameme::before {
+  background-image: var(--tab-bg-image);
 }
 
 <!---->
@@ -1209,14 +1476,12 @@ body {
 
 <div class="modal fade" id="leaderboardModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content" style="border-radius:16px;">
-      <div class="modal-header">
-        <h5 class="modal-title w-100 text-center">Leaderboard</h5>
+    <div class="modal-content leaderboard-modal">
+      <div class="modal-header border-0">
+        <h5 class="modal-title w-100 text-center">🏆 Leaderboard</h5>
+		
       </div>
-      <div class="modal-body">
-
-        <!-- Tabs -->
-        <ul class="nav nav-tabs justify-content-center" id="leaderboardTabs" role="tablist">
+      <ul class="nav nav-tabs justify-content-center leaderboard-tabs" id="leaderboardTabs" role="tablist">
           <li class="nav-item" role="presentation">
             <button class="nav-link active" id="classic-tab" data-bs-toggle="tab" data-bs-target="#classic"
               type="button" role="tab">Classic</button>
@@ -1234,24 +1499,61 @@ body {
               type="button" role="tab">Swish & Match</button>
           </li>
         </ul>
-
+		
+        <!-- Tabs -->
+    <section id="yunhameme">
         <!-- Tab content -->
-        <div class="tab-content mt-3" id="leaderboardTabContent">
-          <div class="tab-pane fade show active" id="classic" role="tabpanel">
-            <div id="leaderboard-classic">Loading...</div>
+        <div class="tab-content" id="leaderboardTabContent">
+          <!-- Classic -->
+          <div class="tab-pane fade show active" id="classic" role="tabpanel" aria-labelledby="classic-tab">
+            <div class="leaderboard-table">
+              <table class="table text-center align-middle mb-0">
+                <thead>
+                  <tr><th>Rank</th><th>Player</th><th>Score</th></tr>
+                </thead>
+                <tbody id="leaderboard-classic-body"></tbody>
+              </table>
+            </div>
           </div>
-          <div class="tab-pane fade" id="hurry" role="tabpanel">
-            <div id="leaderboard-hurry">Loading...</div>
+
+          <!-- Hurry -->
+          <div class="tab-pane fade" id="hurry" role="tabpanel" aria-labelledby="hurry-tab">
+            <div class="leaderboard-table">
+              <table class="table text-center align-middle mb-0">
+                <thead>
+                  <tr><th>Rank</th><th>Player</th><th>Score</th></tr>
+                </thead>
+                <tbody id="leaderboard-hurry-body"></tbody>
+              </table>
+            </div>
           </div>
-          <div class="tab-pane fade" id="dizzy" role="tabpanel">
-            <div id="leaderboard-dizzy">Loading...</div>
+
+          <!-- Dizzy -->
+          <div class="tab-pane fade" id="dizzy" role="tabpanel" aria-labelledby="dizzy-tab">
+            <div class="leaderboard-table">
+              <table class="table text-center align-middle mb-0">
+                <thead>
+                  <tr><th>Rank</th><th>Player</th><th>Score</th></tr>
+                </thead>
+                <tbody id="leaderboard-dizzy-body"></tbody>
+              </table>
+            </div>
           </div>
-          <div class="tab-pane fade" id="swish" role="tabpanel">
-            <div id="leaderboard-swish">Loading...</div>
+
+          <!-- Swish -->
+          <div class="tab-pane fade" id="swish" role="tabpanel" aria-labelledby="swish-tab">
+            <div class="leaderboard-table">
+              <table class="table text-center align-middle mb-0">
+                <thead>
+                  <tr><th>Rank</th><th>Player</th><th>Score</th></tr>
+                </thead>
+                <tbody id="leaderboard-swish-body"></tbody>
+              </table>
+            </div>
           </div>
         </div>
-
-      </div>
+    </section>
+      
     </div>
   </div>
 </div>
@@ -1296,11 +1598,11 @@ body {
 			<img src="images/candy8.png" class="candy-img candy" alt="Candy 8">
 		</div></a>
 		
-       <strong>Classic</strong>Match candies at your own pace.
-       <strong>Hurry Hurry</strong> Score as much as you can before time runs out!
-       <strong>Dizzy Dizzy</strong> Candies randomly shuffle, stay sharp!
-       <strong>Swish and Match</strong> Match special a Special Candy and get extra move! 
-	   <p></p><p></p>      
+		   <strong>Classic</strong>Match candies at your own pace.
+		   <strong>Hurry Hurry</strong> Score as much as you can before time runs out!
+		   <strong>Dizzy Dizzy</strong> Candies randomly shuffle, stay sharp!
+		   <strong>Swish and Match</strong> Match special a Special Candy and get extra move! 
+		   <p></p><p></p>      
 		
 		
 		<a style="color:black; text-decoration:none;" target="_blank" href="https://x.com/BaN4N4000"><strong>Developed By:  @BaN4N4000</a></strong>
@@ -1318,62 +1620,63 @@ body {
 <section id="gameWrapper">
    <div id="boardWrap">
 <div id="gameContainer" aria-hidden="true">
-<button id="backButton">❮❮ Back</button>
+<button id="backButton">❮❮</button>
 <!--  <button id="toggleMusicBtn">Music ❯❯</button> -->
   <!-- <button id="shuffleBtn" class="btn-candy">Shuffle</button> -->
 <div id="shuffleOverlay">No more Tiles to Match!<br>Shuffling...</div>
-  
+
     <div id="innerBoard" role="grid" aria-label="Game board"></div>	
 	<div id="gameInfo">
 	  <div id="timerDisplay">Time: ∞</div>
 	  <div id="modeDisplay"></div>
 	  <div id="scoreDisplay">Score: 0</div>
     </div>		
+	<div id="divider">
+	<div id="playerWrapper">
+		<video id="videoPlayer" style="border-radius:20px; display:none; width:100%; max-height:120px;"></video>
+		<div id="youtubePlayerContainer" style="width:100%; max-height:120px; display:none;">
+		<div id="youtubePlayer"></div></div>
+	</div>	
 
-<div id="playerWrapper">
-  <div id="extraBox">
-    <video id="videoPlayer" controls style="display:none; width:100%; max-height:120px;"></video>
-    <div id="youtubePlayerContainer" style="width:100%; max-height:120px; display:none;">
-    <div id="youtubePlayer"></div></div>
-</div>
-</div>	
-
-	<div id="musicPlayerBox" class="container">
-			 
-	  <audio id="audioPlayer" preload="auto"></audio>		
-	  <!-- Progress bar -->
-	
-      <div class="progress">
-		<div id="progressBar" class="progress-bar bg-danger" style="width: 0%;"></div>
-	  </div>
-		<div class="music-player-grid">
-		   
-		  <!-- LEFT: Dropup -->
-		  <div class="music-player-left">
-
-		    <!-- dynamically generated songs -->
-		    <div class="dropup">
-			  <button id="songTitle" class="btn btn-sm btn-outline-secondary dropdown-toggle"  data-bs-toggle="dropdown">
-				Song List
-			  </button>
-			  <ul class="dropdown-menu" id="songList">
-	          </ul>
-		    </div>
-			  
+		<div id="musicPlayerBox" class="container">
+			<h4 id="songTitle"></h4>	 
+		  <audio id="audioPlayer" preload="auto"></audio>		
+		  <!-- Progress bar -->
+		
+		  <div class="progress">
+			<div id="progressBar" class="progress-bar bg-danger" style="width: 0%;"></div>
 		  </div>
-		    <!-- CENTER: Music Controls -->
-		  <div class="music-player-center">      
-				<button class="btn-candy" id="prevBtn"><i class="bi bi-skip-backward-fill"></i></button>
-				<button class="btn-candy" id="playBtn"><i class="bi bi-play-fill"></i></button>
-				<button class="btn-candy" id="nextBtn"><i class="bi bi-skip-forward-fill"></i></button>
-		  </div>
+			<div class="music-player-grid">
+			   
+			  <!-- LEFT: Dropup -->
+			  <div class="music-player-left" style="opacity:0%; pointer-events:none;">
 
-		  <!-- RIGHT: Volume -->		 
-		  <div class="music-player-right">
+				<!-- dynamically generated songs -->
 				<i class="bi bi-volume-down"></i>
-				<input type="range" id="volumeSlider" min="0" max="100" value="70">
-				<i class="bi bi-volume-up"></i>
-		  </div>
+					<input type="range" id="volumeSlider" min="0" max="100" value="70">
+					<i class="bi bi-volume-up"></i>
+				  
+			  </div>
+				<!-- CENTER: Music Controls -->
+			  <div class="music-player-center">      
+					<button class="btn-candy" id="prevBtn"><i class="bi bi-skip-backward-fill"></i></button>
+					<button class="btn-candy" id="playBtn"><i class="bi bi-play-fill"></i></button>
+					<button class="btn-candy" id="nextBtn"><i class="bi bi-skip-forward-fill"></i></button>
+			  </div>
+
+			  <!-- RIGHT: Volume -->		 
+			  <div class="music-player-right" >
+					
+					
+				<div class="dropup">
+				  <button style="width:20px" class="btn btn-sm btn-outline-secondary dropdown-toggle"  data-bs-toggle="dropdown">	
+				  </button>
+				  <ul class="dropdown-menu" id="songList">
+				  </ul>
+				</div>
+				
+			  </div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -1390,6 +1693,27 @@ body {
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 </script>
 <script>
+
+const tabImages = {
+  classic: 'images/classic.png',
+  hurry: 'images/hurry.png',
+  dizzy: 'images/dizzy.png',
+  swish: 'images/swish.png'
+};
+
+const yunha = document.getElementById('yunhameme');
+const tabs = document.querySelectorAll('#leaderboardTabs button');
+
+tabs.forEach(tab => {
+  tab.addEventListener('shown.bs.tab', (event) => {
+    const targetId = event.target.dataset.bsTarget.substring(1); // e.g. 'classic'
+    const img = tabImages[targetId];
+    yunha.style.setProperty('--tab-bg-image', `url(${img})`);
+  });
+});
+
+// Initialize the first tab
+yunha.style.setProperty('--tab-bg-image', `url(${tabImages['classic']})`);
 
 //shuffle tester
 document.addEventListener("DOMContentLoaded", () => {
@@ -1431,7 +1755,7 @@ nameInput.addEventListener("focus", function () {
 document.addEventListener("DOMContentLoaded", () => {
   const nameModalEl = document.getElementById("playerNameModal");
 
-  // Catch when the modal is hidden (closed by button, outside click, or Esc)
+
   nameModalEl.addEventListener("hidden.bs.modal", () => {
     showMenu();
   });
@@ -1439,29 +1763,53 @@ document.addEventListener("DOMContentLoaded", () => {
 
 let playerName = "Guest";
 
-// When Start Game in welcome box is clicked
-document.getElementById("closeWelcome").addEventListener("click", () => {
-  // Hide welcome box
+
+function closeWelcomeOverlay() {
+
   document.getElementById("welcomeOverlay").style.display = "none";
 
-  // Show name modal
+
   const nameModal = new bootstrap.Modal(document.getElementById('playerNameModal'));
   nameModal.show();
+}
+
+
+document.getElementById("closeWelcome").addEventListener("click", closeWelcomeOverlay);
+
+
+document.getElementById("welcomeOverlay").addEventListener("click", function(e) {
+  const welcomeBox = document.querySelector(".welcome-box");
+
+
+  if (welcomeBox.contains(e.target) && e.target.tagName.toLowerCase() !== "a") {
+    return;
+  }
+
 });
+
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") {
+    const overlay = document.getElementById("welcomeOverlay");
+    if (overlay && overlay.style.display !== "none") {
+      closeWelcomeOverlay();
+    }
+  }
+});
+
 
 document.getElementById("saveNameBtn").addEventListener("click", () => {
   const input = document.getElementById("playerNameInput").value.trim();
   playerName = input || "Guest";
 
-  // Hide modal
+ 
   const nameModalEl = document.getElementById('playerNameModal');
   const modal = bootstrap.Modal.getInstance(nameModalEl);
   modal.hide();
 
-  // 🔹 Start background music
+ 
   startMusic();
 
-  // 🔹 Trigger Swicy Rush title animation
+  
   const gameTitle = document.getElementById("gameTitle");
   const letters = gameTitle.querySelectorAll("span");
 
@@ -1493,69 +1841,6 @@ document.getElementById("saveNameBtn").addEventListener("click", () => {
 });
 
 
-/*
-
-//Into Overlay as music trigger
-document.addEventListener("DOMContentLoaded", () => {
-  const welcomeOverlay = document.getElementById("welcomeOverlay");
-  const closeBtn = document.getElementById("closeWelcome");
-
-  closeBtn.addEventListener("click", () => {
-    welcomeOverlay.style.display = "none";
-  });
-});
-
-welcomeOverlay.addEventListener("click", (e) => {
-  // If the clicked element (or its parent) is an <a>, don't close
-  if (e.target.closest("a")) return;
-
-  // Otherwise, close the overlay
-  welcomeOverlay.style.display = "none";
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  const welcomeOverlay = document.getElementById("welcomeOverlay");
-  const closeBtn = document.getElementById("closeWelcome");
-  const gameTitle = document.getElementById("gameTitle");
-  const letters = gameTitle.querySelectorAll("span");
-
-  closeBtn.addEventListener("click", () => {
-    welcomeOverlay.style.display = "none";
-
-    // 🔹 Play wave animation once
-    gameTitle.classList.add("animate");
-
-    // 🔹 After wave animation ends, start random popping
-    setTimeout(() => {
-      gameTitle.classList.remove("animate");
-
-      let lastIndex = -1;
-
-      setInterval(() => {
-        let randomIndex;
-
-        do {
-          randomIndex = Math.floor(Math.random() * letters.length);
-        } while (
-          randomIndex === lastIndex ||                // not the same as last
-          letters[randomIndex].classList.contains("random-pop") // not already popping
-        );
-
-        lastIndex = randomIndex;
-
-        const randomLetter = letters[randomIndex];
-        randomLetter.classList.add("random-pop");
-
-        // remove after animation so it can trigger again
-        setTimeout(() => {
-          randomLetter.classList.remove("random-pop");
-        }, 500);
-      }, 800); // every 0.8s a random letter pops
-    }, 1500); // wait until wave animation finishes
-  });
-});
-*/
-
 //Rise and Fall Candies
 const candyImages = [
   'images/candy1.png','images/candy2.png','images/candy3.png',
@@ -1573,7 +1858,7 @@ function spawnCandy() {
   const candyWidth = 40;
   candy.style.left = Math.random() * (window.innerWidth - candyWidth) + 'px';
 
-  // Decide direction
+ 
   const direction = Math.random() < 0.5 ? 'fall' : 'rise';
   const duration = Math.random() * 5 + 5; // 5-10s
 
@@ -1581,22 +1866,22 @@ function spawnCandy() {
 
   document.getElementById("floatingCandies").appendChild(candy);
 
-  // Remove after animation
+ 
   candy.addEventListener('animationend', () => candy.remove());
 }
-// spawn new candy every 0.3-0.7 seconds
+
 setInterval(spawnCandy, 400);
 
 
 
-//Possible Moves checker
+
 
 function hasPossibleMoves() {
   for (let r = 0; r < ROWS; r++) {
     for (let c = 0; c < COLS; c++) {
       const val = board[r][c];
 
-      // Check swap with right neighbor
+ 
       if (c < COLS - 1) {
         [board[r][c], board[r][c + 1]] = [board[r][c + 1], board[r][c]];
         if (findAllMatches().length > 0) {
@@ -1606,7 +1891,7 @@ function hasPossibleMoves() {
         [board[r][c], board[r][c + 1]] = [board[r][c + 1], board[r][c]];
       }
 
-      // Check swap with bottom neighbor
+ 
       if (r < ROWS - 1) {
         [board[r][c], board[r + 1][c]] = [board[r + 1][c], board[r][c]];
         if (findAllMatches().length > 0) {
@@ -1622,7 +1907,7 @@ function hasPossibleMoves() {
 
 //Tile Shuffler
 function shuffleBoard() {
-  // Flatten board, shuffle array, then rebuild 2D board
+
   const flat = board.flat();
   for (let i = flat.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -1701,7 +1986,7 @@ mechanicsBtn.addEventListener("click", () => {
 
 
 const ROWS = 8, COLS = 8;
-const IMAGE_PREFIX = 'images/candy';
+const IMAGE_PREFIX = 'images/gcandy.png';
 const BONUS_IMAGE = 'images/bonuscandy.png';
 
 const bonusSound = new Audio("sounds/soundeffects/kwengkweng.MP3");
@@ -1740,7 +2025,7 @@ function createTileElement(r, c, val) {
 
   const img = document.createElement('img');
   img.className = 'tileImg';
-  img.src = (val === 9) ? BONUS_IMAGE : `${IMAGE_PREFIX}${val}.png`;
+  img.src = (val === 9) ? BONUS_IMAGE : `${IMAGE_PREFIX}${val}.PNG`;
   tile.appendChild(img);
 
 
@@ -1815,7 +2100,7 @@ function createTileElement(r, c, val) {
   });
 
   tile.addEventListener('dragover', (e) => {
-    e.preventDefault(); // must prevent default to allow drop
+    e.preventDefault(); 
   });
 
   tile.addEventListener('drop', (e) => {
@@ -1824,7 +2109,7 @@ function createTileElement(r, c, val) {
     onTileDrop(tr, tc);
   });
 
-  // Also keep click-to-select behavior
+ 
   tile.addEventListener('click', () => onTileClick(r, c));
 
   return tile;
@@ -1843,7 +2128,7 @@ function spawnFloatingScore(r, c, points) {
   scoreEl.className = 'floating-score';
   scoreEl.textContent = `+${points}`;
 
-  // position relative to boardWrap
+  
   scoreEl.style.position = 'absolute';
   scoreEl.style.left = `${tileRect.left - boardRect.left + tileRect.width/2 - 12}px`;
   scoreEl.style.top = `${tileRect.top - boardRect.top}px`;
@@ -1912,7 +2197,7 @@ function startTimer(){
 
   if(mode==='Hurry Hurry') {
     timerValue = 120; // 2 minutes in seconds
-    updateHUD();       // show the correct initial time immediately
+    updateHUD();     
   } else {
     timerValue = 999;
     updateHUD();
@@ -2099,7 +2384,7 @@ function findAllMatches(){
 }
 
 async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
-  // Note: we keep a guard to avoid concurrent entry
+
   if (isResolving === false) isResolving = true;
 
   let matches = findAllMatches();
@@ -2108,7 +2393,7 @@ async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
     return;
   }
 
-  // add matching class and mark tile busy (so dizzy won't touch it)
+ 
   const tiles = [];
   matches.forEach(pos => {
     const t = tileDomAt(pos.r, pos.c);
@@ -2119,15 +2404,15 @@ async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
     }
   });
 
-  // wait until all matching animations end (matchPop)
+
   await Promise.all(tiles.map(t => awaitAnimationEnd(t.el, 'matchPop').catch(()=>{})));
 
-  // clear matched tiles and award score
+ 
   const matchedValues = [];
   let suppressMatchSound = false;
 
   matches.forEach(pos => {
-    // guard in case board was already cleared
+ 
     if (board[pos.r][pos.c] == null) return;
     const val = board[pos.r][pos.c];
     matchedValues.push(val);
@@ -2273,14 +2558,14 @@ function startDizzy() {
       }
     }
 
-    // when any changed, after all done resolve matches
+  
     if (anyChange) {
       try {
         await Promise.all(changePromises);
       } catch(e) { /* ignore */ }
-      // give a tiny delay, then resolve matches normally
+ 
       await new Promise(r => setTimeout(r, 80));
-      // call resolveMatchesAndCascade in case dizzy produced matches
+  
       await resolveMatchesAndCascade(false, false);
     }
   }, 2000);
@@ -2354,7 +2639,7 @@ const songs = [
   { title: "Dopamine", file: "https://www.youtube.com/watch?v=7xHZpIxtSZ4", type: "youtube" },
   { title: "Dream of Girls", file: "https://www.youtube.com/watch?v=4W0Qx8gZWKk", type: "youtube" },
   { title: "From The Seed Called Hey Whats Up", file: "https://www.youtube.com/watch?v=vEmwBHJugkY", type: "youtube" },
-  { title: "Good Feeling", file: "sounds/Good Feeling.mp4", type: "video" },
+  { title: "Good Feeling", file: "sounds/Good Feeling.mp3", type: "local" },
   { title: "Love, Day After Tomorrow", file: "https://www.youtube.com/watch?v=uEYKrHztkKE", type: "youtube" },
   { title: "Moshi Moshi EN ver.", file: "https://www.youtube.com/watch?v=RvZEOq5MGzY", type: "youtube" },
   { title: "Moshi Moshi JP ver.", file: "https://www.youtube.com/watch?v=DrU5bxPcH0s", type: "youtube" },
@@ -2362,8 +2647,8 @@ const songs = [
   { title: "See you in my dream (꿈에서 또 만나)", file: "https://www.youtube.com/watch?v=MOudTwsEXzU", type: "youtube" },
   { title: "Shaking My Head", file: "https://www.youtube.com/watch?v=hGNdSFlWUvA", type: "youtube" },
   { title: "Spring Rain", file: "https://www.youtube.com/watch?v=LRMRr22T7UQ&pp=ygUQdW5pcyBzcHJpbmcgcmFpbg%3D%3D", type: "youtube" },
-  { title: "Superwoman", file: "sounds/Superwoman.mp4", type: "video" },
-  { title: "Swicy", file: "sounds/swicy.mp4", type: "video" },
+  { title: "Superwoman", file: "sounds/Superwoman.mp3", type: "local" },
+  { title: "Swicy", file: "sounds/Swicy.mp3", type: "local" },
   { title: "Watchu Need", file: "https://www.youtube.com/watch?v=aE2sk_LbR78", type: "youtube" }  
 ];
 
@@ -2381,6 +2666,8 @@ const songList = document.getElementById("songList");
 
 const youtubeContainer = document.getElementById("youtubePlayerContainer");
 const youtubeIframe = document.getElementById("youtubePlayer");
+
+const playerWrapper = document.getElementById("playerWrapper");
 
 let youtubePlayer;
 
@@ -2426,6 +2713,8 @@ function loadSong(index, autoplay = false) {
 
 if (song.type === "local") {
   // stop YT
+  playerWrapper.style.display = "none";
+  document.getElementById("musicPlayerBox").style.width = "100%";
   if (youtubePlayer && youtubePlayer.stopVideo) {
     youtubePlayer.stopVideo();
   }
@@ -2438,6 +2727,7 @@ if (song.type === "local") {
 
 } else if (song.type === "video") {
   // stop YT
+  playerWrapper.style.display = "flex";
   if (youtubePlayer && youtubePlayer.stopVideo) {
     youtubePlayer.stopVideo();
   }
@@ -2450,6 +2740,7 @@ if (song.type === "local") {
 
 } else if (song.type === "youtube") {
   // pause audio/video
+  playerWrapper.style.display = "flex";
   audio.pause();
   video.pause();
 
@@ -2665,23 +2956,34 @@ async function submitScore(name, score, mode) {
     console.error("❌ Error submitting score:", error);
   } else {
     console.log("✅ Score submitted:", data);
+    // Refresh the leaderboard for this mode
+    renderLeaderboard(mode, `leaderboard-${mode.toLowerCase().replace(/\s+/g, "-")}`);
   }
 }
 
 async function loadLeaderboard(mode) {
   const { data, error } = await supabase
-    .from('leaderboard')
-    .select('name, score')
-    .eq('mode', mode)              // filter by current mode
-    .order('score', { ascending: false })
+    .from("leaderboard")
+    .select("name, score")
+    .eq("mode", mode)
+    .order("score", { ascending: false })
     .limit(10);
 
   if (error) {
-    console.error("❌ Error loading leaderboard:", error);
+    console.error(`❌ Error loading ${mode} leaderboard:`, error);
     return [];
   }
+
   return data;
 }
+
+document.getElementById("leaderboardModal")
+  .addEventListener("show.bs.modal", () => {
+    renderLeaderboard("Classic", "leaderboard-classic-body");
+    renderLeaderboard("Hurry Hurry", "leaderboard-hurry-body");
+    renderLeaderboard("Dizzy Dizzy", "leaderboard-dizzy-body");
+    renderLeaderboard("Swish and Match", "leaderboard-swish-body");
+  });
 
 async function renderLeaderboard(mode, containerId) {
   const scores = await loadLeaderboard(mode);
@@ -2689,11 +2991,15 @@ async function renderLeaderboard(mode, containerId) {
 
   container.innerHTML = scores.length > 0
     ? `
-      <table class="table table-sm table-striped">
-        <thead><tr><th>#</th><th>Name</th><th>Score</th></tr></thead>
+      <table class="table table-sm table-striped text-center align-middle">
+        
         <tbody>
           ${scores.map((s, i) =>
-            `<tr><td>${i + 1}</td><td>${s.name}</td><td>${s.score}</td></tr>`
+            `<tr>
+               <td>${i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : i + 1}</td>
+               <td>${s.name}</td>
+               <td>${s.score}</td>
+             </tr>`
           ).join("")}
         </tbody>
       </table>
@@ -2701,14 +3007,8 @@ async function renderLeaderboard(mode, containerId) {
     : "<p><em>No scores yet</em></p>";
 }
 
-// When leaderboard modal opens, load all tabs
-document.getElementById('leaderboardModal')
-  .addEventListener('show.bs.modal', () => {
-    renderLeaderboard("Classic", "leaderboard-classic");
-    renderLeaderboard("Hurry Hurry", "leaderboard-hurry");
-    renderLeaderboard("Dizzy Dizzy", "leaderboard-dizzy");
-    renderLeaderboard("Swish and Match", "leaderboard-swish");
-  });
+// Load all leaderboards when modal opens
+
 
 </script>
 

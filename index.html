@@ -3209,6 +3209,19 @@ function spawnFloatingMove(r, c, amount = 1) {
 }
 try { spawnFloatingMove(m.r, m.c); } catch(e){ console.error(e); }
 
+
+// helper: play an Audio element immediately, allowing overlaps
+function playSound(audio) {
+  try {
+    const s = audio.cloneNode();
+    s.currentTime = 0;
+    s.play().catch(() => {}); // ignore play errors
+  } catch (e) {
+    // fallback: try original (may still be null in some envs)
+    try { audio.currentTime = 0; audio.play().catch(() => {}); } catch(_) {}
+  }
+}
+
 async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
   if (isResolving === false) isResolving = true;
 
@@ -3222,6 +3235,7 @@ async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
   // 🔹 Handle clears (mark tiles null + play animations)
   for (const m of matches) {
     if (m.type.includes("row4")) {
+      // row swish already at section-level
       swishSound.currentTime = 0;
       swishSound.play();
 
@@ -3232,12 +3246,13 @@ async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
         if (board[m.r][cc] != null) {
           if (mode === 'Swish and Match' && board[m.r][cc] === 9) {
             movesLeft++;
-            bonusSound.currentTime = 0;
-            bonusSound.play();
+            playSound(bonusSound);
             spawnFloatingMove(m.r, cc);
           } else {
             score += 15;
             spawnFloatingScore(m.r, cc, 15);
+            // play immediate per-tile match sound
+            playSound(matchSound);
           }
           board[m.r][cc] = null;
         }
@@ -3255,12 +3270,12 @@ async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
         if (board[rr][m.c] != null) {
           if (mode === 'Swish and Match' && board[rr][m.c] === 9) {
             movesLeft++;
-            bonusSound.currentTime = 0;
-            bonusSound.play();
+            playSound(bonusSound);
             spawnFloatingMove(rr, m.c);
           } else {
             score += 15;
             spawnFloatingScore(rr, m.c, 15);
+            playSound(matchSound);
           }
           board[rr][m.c] = null;
         }
@@ -3276,12 +3291,12 @@ async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
             if (board[rr][cc] !== null) {
               if (mode === 'Swish and Match' && board[rr][cc] === 9) {
                 movesLeft++;
-                bonusSound.currentTime = 0;
-                bonusSound.play();
+                playSound(bonusSound);
                 spawnFloatingMove(rr, cc);
               } else {
                 score += 15;
                 spawnFloatingScore(rr, cc, 15);
+                playSound(matchSound);
               }
 
               board[rr][cc] = null;
@@ -3319,12 +3334,12 @@ async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
                 if (board[rr][x] != null) {
                   if (mode === 'Swish and Match' && board[rr][x] === 9) {
                     movesLeft++;
-                    bonusSound.currentTime = 0;
-                    bonusSound.play();
+                    playSound(bonusSound);
                     spawnFloatingMove(rr, x);
                   } else {
                     score += 20;
                     spawnFloatingScore(rr, x, 20);
+                    playSound(matchSound);
                   }
                   board[rr][x] = null;
                 }
@@ -3343,12 +3358,12 @@ async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
                 if (board[y][cc] != null) {
                   if (mode === 'Swish and Match' && board[y][cc] === 9) {
                     movesLeft++;
-                    bonusSound.currentTime = 0;
-                    bonusSound.play();
+                    playSound(bonusSound);
                     spawnFloatingMove(y, cc);
                   } else {
                     score += 10;
                     spawnFloatingScore(y, cc, 10);
+                    playSound(matchSound);
                   }
                   board[y][cc] = null;
                 }
@@ -3366,12 +3381,12 @@ async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
       if (board[m.r][m.c] != null) {
         if (mode === 'Swish and Match' && board[m.r][m.c] === 9) {
           movesLeft++;
-          bonusSound.currentTime = 0;
-          bonusSound.play();
+          playSound(bonusSound);
           spawnFloatingMove(m.r, m.c);
         } else {
           score += 10;
           spawnFloatingScore(m.r, m.c, 10);
+          playSound(matchSound);
         }
         board[m.r][m.c] = null;
       }
@@ -3401,18 +3416,15 @@ async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
     const addedTime = scoreBonus - previousBonus;
     if (addedTime > 0) {
       timerValue += addedTime;
-      hurryBonusSound.currentTime = 0;
-      hurryBonusSound.play();
+      // play hurry bonus immediately
+      playSound(hurryBonusSound);
       suppressMatchSound = true;
     }
   }
 
   const onlyNormalMatches = matches.every(m => m.type === "normal");
 
-  if (matches.length > 0 && !suppressMatchSound && onlyNormalMatches) {
-    matchSound.currentTime = 0;
-    matchSound.play();
-  }
+  // (matchSound is now played per-tile, so no global call here)
 
   // Swish & Move mode
   if (mode === 'Swish and Match') {
@@ -3424,8 +3436,7 @@ async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
     }
     updateHUD();
     if (movesLeft <= 0) {
-      noMovesLeftSound.currentTime = 0;
-      noMovesLeftSound.play();
+      playSound(noMovesLeftSound);
       setTimeout(() => gameOver('No Move Left!'), 500);
     }
   } else {

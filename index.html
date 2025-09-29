@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Swicy Rush — Demo</title>
+<title>Unis — Swicy Rush</title>
+<link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
 <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Luckiest+Guy&family=Fredoka+One&family=Baloo+2:wght@600&family=Bangers&family=Bubblegum+Sans&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -43,11 +44,11 @@ body {
 
 #appWrapper {
   width: 90%;   
-  width: calc(100% - 5%);   /* leaves 10% margin left + right */
-  max-width: 90;          /* prevent growing too big on desktop */
+  width: calc(100% - 5%);   
+  max-width: 90;      
   height: 100%;
   min-height:90%;
-  margin: 0 auto;            /* centers it */
+  margin: 0 auto;           
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -61,23 +62,24 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 0.1vh; 
-  max-height: 100vh;      /* fits screen */
+  max-height: 100vh;   
 }
 
 #mainMenu {
-  width: min(80vw, 400px);   /* scale to screen width but not larger than desktop size */
-  height: min(95vh, 95vw);   /* scale height, stay square-ish */
+  width: min(80vw, 400px);  
+  height: min(95vh, 95vw);   
 }
 
 #gameContainer,
 #musicPlayerBox {
   transform: scale(1);      
-  transform-origin: center;    /* keep them centered */
+  transform-origin: center;   
 } 
 
 #innerBoard {
-  width: min(95vw, 95vh, 95%);  /* fit inside viewport and parent */
-  aspect-ratio: 1 / 1;          /* always square */
+  margin-top:2%;
+  width: min(95vw, 95vh, 95%);  
+  aspect-ratio: 1 / 1;          
   display: flex;
   align-items: center;
   justify-content: center;
@@ -162,12 +164,13 @@ body {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(8, 1fr);
+  opacity:90%;
   gap: 0%;
   padding: 1%;
   
   
   border-radius: 3%;
-  background: #a79393;
+  background: #7a657b !important;
   box-shadow: inset 0 2.5% 5% rgba(0,0,0,0.18),
               inset 0 -1.5% 3% rgba(0,0,0,0.08);
   box-sizing: border-box;
@@ -190,7 +193,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 30px 20px;
+  padding: 0.8em 1.2em;
   box-sizing: border-box;
   margin: 0 auto;
   gap: 16px;
@@ -204,6 +207,8 @@ body {
   letter-spacing: 1px;
   text-align: center;
   top: 5%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 #mainMenu .menuBtn {
@@ -225,44 +230,42 @@ body {
   box-shadow: 0 0 12px 4px rgba(255, 77, 166, 0.6);
 }
 
-@media (max-width: 768px) {
-  #mainMenu {
-    height: 80vh; /* Slightly reduce height for medium screens */
-    padding: 50px 16px;
-    gap: 14px;
-  }
-
-  #mainMenu .menuBtn {
-    font-size: 1rem; /* smaller font size for medium screens */
-    padding: 10px 20px; /* slightly reduced padding */
-  }
-
-  #mainMenu .menuBtn {
-    width: 80%; /* make buttons stretch across the width on medium screens */
-  }
+#gameTitle span {
+  font-size: 5rem;
 }
 
 @media (max-width: 400px) {
   #mainMenu {
-    height: 75vh;
-    padding: 40px 16px;
-    gap: 12px;
+    min-height: 450px; /* allow smaller */
+    padding: 24px 12px; /* tighter padding */
+    gap: 8px;
   }
 
   #mainMenu .menuBtn {
-    font-size: 0.9rem; /* smaller font size for smaller screens */
-    padding: 8px 12px; /* reduce padding for smaller screens */
-  }
-
-  #mainMenu .menuBtn {
-    width: 90%; /* buttons take almost full width on small screens */
+    font-size: 1rem;
+    padding: 6px 10px;
   }
 
   #gameTitle span {
-    font-size: 1.5rem; /* adjust game title size */
+    font-size: 3rem; /* still big but won’t crush the buttons */
   }
 }
 
+@media (max-width: 1920px) {
+	#mainMenu {
+		height: 80vh; /* Slightly reduce height for medium screens */
+		padding: 50px 16px;
+		gap: 14px;
+	  }
+
+
+	  #mainMenu .menuBtn {
+		width: 80%; /* make buttons stretch across the width on medium screens */
+	  }
+	  #gameTitle span {
+		font-size: 5rem;
+	  }  
+}
 
 
 /* =========================
@@ -288,20 +291,6 @@ body {
   transform: translateY(-2px);
 }
 
-/* Responsive adjustments for very small screens */
-@media (max-width: 360px) {
-  #mainMenu {
-    width: 95vw;
-    padding: 1rem 0.5rem;
-    gap: 0.5rem;
-  }
-
-  .menuBtn {
-    font-size: clamp(10px, 4vw, 16px);
-    padding: 0.4rem 0.6rem;
-  }
-}
-
 .btn-candy {
   border: none;
   border-radius: 50%;
@@ -311,7 +300,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white; /* var(--pink)*/
+  background: none; 
   color: var(--pink);
   cursor: pointer;
   transition: transform 0.2s ease;
@@ -321,6 +310,10 @@ body {
 }
 .btn-candy:active {
   transform: scale(0.95);
+}
+.btn-candy {
+  padding: 0;        /* removes internal space */
+  line-height: 1;    /* keeps icons centered */
 }
 
 #toggleMusicBtn {
@@ -415,13 +408,27 @@ body {
   object-fit: cover;
 }
 
+.tile.hint {
+  animation: hintPulse 1s infinite alternate;
+  box-shadow: 0 0 15px 5px yellow;
+  border-radius: 10px;
+}
+
+@keyframes hintPulse {
+  from { transform: scale(1); opacity: 1; }
+  to   { transform: scale(1.15); opacity: 0.7; }
+}
+
 .tile.matching { animation: matchPop 0.4s ease forwards !important;}
 @keyframes matchPop { 0%{transform:scale(1);opacity:1;}50%{transform:scale(1.2);opacity:.8;}100%{transform:scale(0);opacity:0;} }
 
-.tile.dizzyChange { animation: dizzyPop 0.4s ease forwards; }
+.tile.dizzyChange { 
+  animation: dizzyPop 0.4s ease forwards !important;
+}
+
 @keyframes dizzyPop {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.15); opacity: 0.6; }
+  0%   { transform: scale(1); opacity: 1; }
+  50%  { transform: scale(1.15); opacity: 0.6; }
   100% { transform: scale(0); opacity: 0; }
 }
 
@@ -437,6 +444,140 @@ body {
 .tile:hover { animation: hoverPulse 0.6s infinite ease-in-out; }
 .tile.selected { animation: glowPulse 1s infinite ease-in-out; }
 
+/* 🔹 Horizontal row clear effect */
+@keyframes rowClear {
+  0%   { background: lightpink; transform: scale(1); opacity: 1; }
+  50%  { background: pink; transform: scale(1.2); opacity: 0.8; }
+  100% { background: transparent; transform: scale(0.8); opacity: 0; }
+}
+.tile.row-clearing {
+  animation: rowClear 0.6s ease forwards;
+  z-index: 10;
+}
+
+/* 🔹 Vertical column clear effect */
+@keyframes colClear {
+  0%   { background: lightpink; transform: scale(1); opacity: 1; }
+  50%  { background: pink; transform: scale(1.2); opacity: 0.8; }
+  100% { background: transparent; transform: scale(0.8); opacity: 0; }
+}
+.tile.col-clearing {
+  animation: colClear 0.6s ease forwards;
+  z-index: 10;
+}
+
+/* 🔹 Row clear swish */
+.tile.row-clearing::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -100%;
+  width: 300%;
+  height: 30%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 105, 180, 0.8), /* HotPink */
+    transparent
+  );
+  transform: translateY(-50%);
+  animation: rowSwish 0.6s ease forwards;
+  pointer-events: none;
+  z-index: 20;
+}
+
+@keyframes rowSwish {
+  0%   { left: -100%; opacity: 1; }
+  100% { left: 100%;  opacity: 0; }
+}
+
+/* 🔹 Column clear swish */
+.tile.col-clearing::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -100%;
+  width: 30%;
+  height: 300%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 105, 180, 0.8), /* HotPink */
+    transparent
+  );
+  transform: translateX(-50%);
+  animation: colSwish 0.6s ease forwards;
+  pointer-events: none;
+  z-index: 20;
+}
+
+@keyframes colSwish {
+  0%   { top: -100%; opacity: 1; }
+  100% { top: 100%;  opacity: 0; }
+}
+
+
+@keyframes wrappedClear {
+  0% {
+    background: #ffb6c1; /* light pink flash */
+    transform: scale(1);
+    opacity: 1;
+    box-shadow: 0 0 10px 5px rgba(255,105,180,0.8); /* hotpink glow */
+  }
+  50% {
+    background: #ff69b4; /* stronger pink */
+    transform: scale(1.4);
+    opacity: 0.8;
+    box-shadow: 0 0 20px 10px rgba(255,20,147,0.9); /* deep pink glow */
+  }
+  100% {
+    background: transparent;
+    transform: scale(0.6);
+    opacity: 0;
+    box-shadow: none;
+  }
+}
+
+.tile.wrapped-clearing {
+  animation: wrappedClear 0.6s ease forwards;
+  z-index: 20;
+  border: lightpink; 
+}
+
+.tile.colorbomb-clearing {
+  animation: colorBombClear 0.7s ease forwards;
+  z-index: 40;
+}
+
+@keyframes colorBombClear {
+  0%   { background: radial-gradient(circle, #ff69b4, #pink, #pink); transform: scale(1); opacity: 1; }
+  50%  { background: radial-gradient(circle, #ff69b4, #pink, #pink); transform: scale(1.5); opacity: 0.9; }
+  100% { background: transparent; transform: scale(0.6); opacity: 0; }
+}
+
+/* Popping animation (new spawns) */
+@keyframes popSpawn {
+  0%   { transform: scale(0); opacity: 0; }
+  60%  { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.tile.spawning {
+  animation: popSpawn 0.35s ease-out;
+}
+
+
+@keyframes fallBounce {
+  0%   { transform: translateY(calc(var(--fall-distance, 100%) * -1)); opacity: 0.8; filter: blur(1px); }
+  70%  { transform: translateY(0); opacity: 0.7; filter: blur(0.5px); }
+  85%  { transform: translateY(-6%); filter: blur(0.8px); }
+  100% { transform: translateY(0); filter: blur(0); }
+}
+
+.tile.falling {
+  opacity:0;
+  animation: fallBounce 0.3s cubic-bezier(.25,1.3,.5,1) forwards;
+}
 /* =========================
    6. Floating Candies
 ========================= */
@@ -459,6 +600,18 @@ body {
 }
 @keyframes rise {0%{transform:translate(0,100vh);opacity:0;}20%{opacity:1;}50%{transform:translate(20px,50vh);}100%{transform:translate(-10px,-50px);opacity:0;}}
 @keyframes fall {0%{transform:translate(0,-50px);opacity:0;}20%{opacity:1;}50%{transform:translate(-15px,50vh);}100%{transform:translate(10px,100vh);opacity:0;}}
+
+.floating-move {
+  animation: floatMoveUp 1s ease-out forwards;
+  white-space: nowrap;
+  position:absolute; font-weight:800; color: #4dff4d; font-size:20px;
+  pointer-events:none; animation: floatUp 0.8s ease forwards;
+  text-shadow: 0 0 6px #4dff4d, 0 0 10px #ff4da6;
+}
+@keyframes floatMoveUp {
+  from { transform: translate(-50%, 0) scale(1); opacity: 1; }
+  to   { transform: translate(-50%, -60px) scale(1.05); opacity: 0; }
+}
 
 /* =========================
    7. Score, Timer, Moves and Mode Display
@@ -506,8 +659,9 @@ body {
   gap: 0.5em;
   z-index: 25;
   box-sizing: border-box;
-  margin: 0 0 4vh 0;
-  justify-content:center;
+  margin: 0 0 2vh 0;
+  justify-content: center;
+  min-height:100px;
 }
 /*
 #extraBox,#musicPlayerBox {   
@@ -550,12 +704,16 @@ body {
 }
 
 .progress {
-  height: clamp(6px, 0.6vw, 8px);
-  margin: clamp(1%, 1vw, 1%) 0;
+  flex: 0 0 auto;                       /* don’t let flex shrink it */
+  width: 100%;
+  min-height: 8px;                      /* absolute minimum */
+  height: clamp(4px, 0.5vh, 6px);        /* responsive, ties to viewport height */
+  margin: 8px 0;                        /* steady breathing room */
   border-radius: 4px;
   background: #ffb6c1;
   cursor: pointer;
   position: relative;
+  overflow: visible;                    /* knob won’t get cut */
 }
 
 #progressBar {
@@ -568,14 +726,16 @@ body {
 #progressKnob {
   position: absolute;
   top: 50%;
-  width: 12px;
-  height: 12px;
+  left: 0;                            /* will be moved by JS */
+  width: clamp(10px, 1vh, 14px);      /* scales with screen */
+  height: clamp(10px, 1vh, 14px);
   background: white;
   border: 2px solid #ff4da6;
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  pointer-events: none;
+  pointer-events: none;               /* knob won’t block clicks */
 }
+
 
 
 .music-box { width: 100%; background: #fff; border-radius: 16px; padding: 0; text-align: center; }
@@ -595,7 +755,8 @@ body {
 
 #volumeSlider {
   -webkit-appearance: none;
-  max-width: 50px; /* fixed width to prevent zoom scaling */
+  width: 100%;                       
+  max-width: clamp(40px, 15vw, 80px); 
   height: 0.5rem;
   border-radius: 999px;
   background: linear-gradient(90deg, #ff4da6, #ffb6c1);
@@ -603,17 +764,24 @@ body {
   transition: box-shadow 0.2s ease;
 }
 
+
+@media (max-width: 480px) {
+  .with-iframe .music-player-right {
+    display: none;
+  }
+}
+
 #volumeSlider::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 1.2rem;
-  height: 1.2rem;
+  width: clamp(10px, 2.5vmin, 16px);
+  height: clamp(10px, 2.5vmin, 16px);
   border-radius: 50%;
   background: white;
   border: 2px solid #ff4da6;
   cursor: pointer;
   transition: transform 0.15s ease;
+  box-shadow: 0 0 0 10px transparent; 
 }
-
 #volumeSlider:hover::-webkit-slider-thumb {
   transform: scale(1.1);
 }
@@ -624,8 +792,8 @@ body {
   border: 2px solid #ff4da6;
 }
 .dropup {
-  position: relative; /* anchor for absolute dropdown */
-  width: 100%;        /* keeps it aligned with button */
+  position: relative; 
+  width: 100%;        
 }
 
 .dropup .dropdown-menu {
@@ -712,7 +880,7 @@ body {
 }
 
 #songTitle {
-    width: 80%;                           
+    width: 95%;                           
     max-width: 400px;                     
     font-size: clamp(12px, 1.5vw, 13px);  
     margin: 1% auto 0 auto;
@@ -753,14 +921,12 @@ body {
   overflow: overflow;
 }
 
-/* LEFT: Dropup */
+/* LEFT: Volume */
 .music-player-left {
+  margin-left: 0;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-wrap: nowrap;       
+  justify-content: flex-start;    
   min-width: 0;
-  
 }
 
 /* CENTER: Controls */
@@ -768,23 +934,19 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.2rem;
   flex-wrap: nowrap;
   min-width: 0;
 }
 
-/* RIGHT: Volume */
+/* RIGHT: Dropup */
 .music-player-right {
   display: flex;
-  justify-content: flex-end; 
+  justify-content: flex-end;
   align-items: center;
-  width: 100%; /* so it has full horizontal space to push */
+
 }
 
-/* Make volume slider stretch a bit */
-.music-player-right input[type="range"] {
-  width: clamp(80px, 20vmin, 150px);  
-}
 
 /* =========================
    9. Modals and Overlays
@@ -870,16 +1032,16 @@ body {
 }
 
 .welcome-box button {
-  font-size: clamp(0.9rem, 2.8vw, 1.05rem);  /* smaller button text */
+  font-size: clamp(0.9rem, 2.8vw, 1.05rem);  
   padding: clamp(0.4rem, 1.8vw, 0.7rem) clamp(0.8rem, 3.5vw, 1.2rem);
-  border-radius: 0.6rem;               /* rounded corners */
+  border-radius: 0.6rem;               
   border: none;
-  background: #ff6f91;                     /* example: pinkish theme */
+  background: #ff6f91;                     
   color: white;
   font-weight: bold;
   cursor: pointer;
   transition: transform 0.2s ease, background 0.3s ease;
-  width: fit-content;                      /* shrink to content */
+  width: fit-content;                      
   max-width: 80%;
   margin: 0.5em 0;  /* don’t overflow */
 }
@@ -891,18 +1053,18 @@ body {
 }
 
 #saveNameBtn {
-  font-size: clamp(0.9rem, 2.8vw, 1.05rem);  /* smaller button text */
+  font-size: clamp(0.9rem, 2.8vw, 1.05rem); 
   padding: clamp(0.4rem, 1.8vw, 0.7rem) clamp(0.8rem, 3.5vw, 1.2rem);
-  border-radius: 0.6rem;               /* rounded corners */
+  border-radius: 0.6rem;               
   border: none;
-  background: #ff6f91;                     /* example: pinkish theme */
+  background: #ff6f91;                     
   color: white;
   font-weight: bold;
   cursor: pointer;
   transition: transform 0.2s ease, background 0.3s ease;
-  width: fit-content;                      /* shrink to content */
+  width: fit-content;                      
   max-width: 80%;
-  margin: 0.5em 0;  /* don’t overflow */
+  margin: 0.5em 0; 
 }
 
 /* Hover / tap effect */
@@ -922,24 +1084,7 @@ body {
   margin: 5px 0;
   text-align: center;
 }
-.candy-text span {
-  display:inline-block;
-  cursor:pointer;
-  transition: color 0.3s ease, text-shadow 0.3s ease;
-}
-.candy-text span:hover {
-  color:#ff1a75;
-  text-shadow:0 0 15px #ff99cc,0 0 25px #ff4da6;
-  animation: popBounce 0.4s ease;
-}
 
-@keyframes popBounce {
-  0%   { transform: scale(1); }
-  40%  { transform: scale(1.15); }
-  60%  { transform: scale(0.95); }
-  80%  { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
 .candy-animation {
   display: flex;
   gap: 10px;
@@ -950,11 +1095,6 @@ body {
   display: inline-block;
   animation: bounceCandy 1s infinite ease-in-out;
 }
-
-.candy-img {
-   width: clamp(30px, 5vw, 50px);
-}
-
 .candy:nth-child(1) { animation-delay: 0s; }
 .candy:nth-child(2) { animation-delay: 0.1s; }
 .candy:nth-child(3) { animation-delay: 0.2s; }
@@ -979,8 +1119,8 @@ body {
   }
   
 :root{
-  --fade-out-dur: 500ms;
-  --fade-in-dur: 600ms;
+  --fade-out-dur: 300ms;
+  --fade-in-dur: 300ms;
 }
 
 /* =========================
@@ -1012,6 +1152,25 @@ body {
   width: 60px;
   border-radius: 50%;
   margin-bottom: 0.5rem;
+}
+
+.candy-text span {
+  display:inline-block;
+  cursor:pointer;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+.candy-text span:hover {
+  color:#ff1a75;
+  text-shadow:0 0 15px #ff99cc,0 0 25px #ff4da6;
+  animation: popBounce 0.4s ease;
+}
+
+@keyframes popBounce {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.15); }
+  60%  { transform: scale(0.95); }
+  80%  { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
 @keyframes popIn {
@@ -1093,7 +1252,7 @@ body {
 /* SCROLL UI */
 /* Ensure welcome-box scrolls */
 .welcome-box {
-  max-height: 80vh;                /* adjust if needed */
+  max-height: 80vh;                
   overflow-y: auto;
   -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
 }
@@ -1233,18 +1392,18 @@ body {
 }
 
 #leaderboardModal .modal-body {
-  max-height: 70vh;         /* 70% of viewport */
-  overflow-y: auto;         /* enable scrolling */
-  padding: 0;               /* optional: tighter fit */
+  max-height: 70vh;         
+  overflow-y: auto;         
+  padding: 0;              
 }
 
 #leaderboardTabContent {
   max-width: 100% !important;
   max-height: 100%;
-  margin: 0 auto;                /* horizontal center */
-  justify-content: center;       /* center children horizontally */
-  align-items: center;           /* center children vertically */
-  flex-direction: column;        /* stack tab panes vertically */
+  margin: 0 auto;                
+  justify-content: center;       
+  align-items: center;          
+  flex-direction: column;       
 }
 
 .leaderboard-table table {
@@ -1254,15 +1413,15 @@ body {
 }
 .leaderboard-table thead th {
   position: sticky;
-  background: #ff4da6;     /* match theme */
+  background: #ff4da6;     
   color: white;
   z-index: 2;
 }
 
 /* Compact rank 1–10 */
 .leaderboard-table tbody tr:nth-child(-n+10) td {
-  padding: 8px 6px;     /* smaller height */
-  font-size: 1rem;    /* smaller text */
+  padding: 8px 6px;     
+  font-size: 1rem;    
 }
 
 /* Keep header readable */
@@ -1275,12 +1434,12 @@ body {
 /* 📱 On small screens: more compact */
 @media (max-width: 576px) {
   .leaderboard-table {
-    max-height: 90vh;      /* smaller slice of screen */
+    max-height: 90vh;      
   }
   .leaderboard-table table th,
   .leaderboard-table table td {
-    padding: 6px;          /* tighter rows */
-    font-size: 0.9rem;     /* smaller text */
+    padding: 6px;          
+    font-size: 0.9rem;     
   }
 }
 
@@ -1415,9 +1574,198 @@ body {
 
 <!---->
 
+/* =====================
+   DARK MODE VARIABLES
+===================== */
+:root {
+  --accent: #87ceeb;
+  --pink: #ff4da6;
+  --bg1: linear-gradient(135deg, #ffdde1, #ee9ca7);
+  --surface: #ffffff;
+  --surface-alt: #f8f8f8;
+  --text: #111111;
+}
+
+body.dark-mode {
+  --accent: #87ceeb;
+  --pink: #ff4da6; /* keep candy pinks */
+  --bg1: linear-gradient(135deg, #1a1a1d, #2a2a2e);
+  --surface: #222222;
+  --surface-alt: #2e2e2e;
+  --text: #f0f0f0;
+}
+
+/* Apply variables */
+body {
+  background: var(--bg1) !important;
+  color: var(--text) !important;
+}
+
+#mainMenu,
+#gameContainer,
+.welcome-box,
+.leaderboard-modal,
+#musicPlayerBox,
+.modal-content {
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+#innerBoard {
+  background: #2e2e2e;
+}
+
+#gameInfo {
+  background: none;
+  color: var(--text) !important;
+}
+
+#songTitle {
+  background: var(--surface-alt) !important;
+  color: var(--text) !important;
+}
+
+/* Ensure leaderboard text pops on dark */
+.leaderboard-modal .modal-title,
+.leaderboard-tabs .nav-link {
+  color: var(--pink);
+}
+
+/* Keep buttons pink */
+.menuBtn, #mechanicsButton, #backButton, #toggleMusicBtn {
+  background: var(--pink) !important;
+  color: #fff !important;
+}
+
+#darkModeSwitchWrapper {
+  font-size: 1.2rem;
+}
+
+/* =====================
+   DARK MODE TOGGLE SWITCH
+===================== */
+
+/* Wrapper for layout */
+#darkModeSwitchWrapper {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  z-index: 1000;
+  font-size: clamp(16px, 3vw, 22px);
+}
+
+/* Reset the default checkbox */
+#darkModeSwitchWrapper input[type="checkbox"] {
+  scale:0.8;
+  appearance: none;
+  -webkit-appearance: none;
+  width: clamp(50px, 10vw, 62px);
+  height: clamp(24px, 5vw, 32px);
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff80c0, #ff4da6);
+  cursor: pointer;
+  position: relative;
+  outline: none;
+  transition: background 0.3s ease;
+}
+
+/* Slider knob */
+#darkModeSwitchWrapper input[type="checkbox"]::before {
+  content: "";
+  position: absolute;
+  width: clamp(16px, 4vw, 24px);   /* responsive width */
+  height: clamp(16px, 4vw, 24px);  /* responsive height */
+  border-radius: 50%;
+  top: 50%;
+  left: 4px;
+  background: #fff;
+  transform: translateY(-50%);
+  transition: transform 0.3s ease;
+}
+
+/* Checked state → knob slides right */
+#darkModeSwitchWrapper input[type="checkbox"]:checked::before {
+  transform: translate(30px, -50%);
+}
+
+/* Sun/Moon icons */
+#darkModeSwitchWrapper .bi {
+  position: absolute;
+  right: 65px;          /* offset to the right of the toggle */
+  font-size: 1.4rem;
+  color: var(--pink);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Inactive icons are hidden */
+#darkModeSwitchWrapper .inactive {
+  opacity: 0;
+  transform: scale(0.7);
+  pointer-events: none;
+}
+
+/* Modal backdrop */
+.pause-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.pause-modal.hidden {
+  display: none;
+}
+
+/* Modal box */
+.pause-box {
+  background: var(--pink);
+  color: #fff;
+  padding: 24px 32px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(255, 77, 166, 0.7);
+  animation: popIn 0.4s ease; /* reuse your popIn animation */
+}
+
+.pause-box h2 {
+  margin: 0 0 12px;
+}
+
+.pause-box button {
+  margin-top: 12px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--pink);
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.pause-box button:hover {
+  transform: scale(1.1);
+}
+
 </style>
 </head>
 <body>
+<div id="pauseModal" class="pause-modal hidden">
+  <div class="pause-box">
+    <h2>Game Paused</h2>
+    <p>You’ve been idle for 30 seconds.</p>
+    <button id="resumeBtn">Resume</button>
+  </div>
+</div>
 <!-- Welcome Overlay -->
 <div id="leaderboard"></div>
 <div id="welcomeOverlay" class="overlay">
@@ -1432,13 +1780,13 @@ body {
     </p>
     
     <div class="credits">
-      <p><a style="color:black; text-decoration:none;" target="_blank" href="https://x.com/BaN4N4000"><img src="images/ban4n400.png" style="width:60px; height:60px;" alt="BaN4N4000"><br>
+      <p><a style="color:var(--pink); text-decoration:none;" target="_blank" href="https://x.com/BaN4N4000"><img src="images/ban4n400.png" style="width:60px; height:60px;" alt="BaN4N4000"><br>
 		<strong>Developed by: @BaN4N4000</a></strong>
       <br>
-        Special thanks to 
-        <a style="color:black; text-decoration:none;" target="_blank" href="https://x.com/_8n0nx">@_8n0nx for the UNIS Pixel Art</a>
+    
+        <a style="color:var(--pink); text-decoration:none;" target="_blank" href="https://x.com/_8n0nx">Special thanks to @_8n0nx for the UNIS Pixel Art</a>
       </p>
-	<a style="color:black; text-decoration:none;" target="_blank" href="https://x.com/_8n0nx">
+	<a style="color:var(--pink); text-decoration:none;" target="_blank" href="https://x.com/_8n0nx">
     <div class="candy-animation">
       <img src="images/candy1.png" class="candy-img candy" alt="Candy 1">
       <img src="images/candy2.png" class="candy-img candy" alt="Candy 2">
@@ -1457,7 +1805,7 @@ body {
 <!-- Player Name Modal -->
 <div class="modal fade" id="playerNameModal" tabindex="-1" aria-labelledby="playerNameModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content" style="border-radius:16px; max-width:400px; margin:auto;">
+    <div class="modal-content" style="border-radius:16px; max-width:90%; margin:auto;">
       <div class="modal-header">
         <h5 class="modal-title w-100 text-center" id="playerNameModalLabel">Enter Your Name</h5>
       </div>
@@ -1563,17 +1911,23 @@ body {
 <div id="floatingCandies"></div>
 <div id="appWrapper">
 <section id="mainMenu" aria-label="Main menu">
-  <h2 id="gameTitle" class="candy-text bangers">
-    <span>S</span><span>w</span><span>i</span><span>c</span><span>y</span> <span>R</span><span>u</span><span>s</span><span>h</span>
-  </h2>
+
+<div id="darkModeSwitchWrapper">
+  <i class="bi bi-sun-fill" style="color:var(--pink);" id="sunIcon"></i>
+  <i class="bi bi-moon-stars-fill inactive" style="color:var(--pink);" id="moonIcon"></i>
+  <input type="checkbox" id="darkModeToggle">
+</div>
   
-  <button id="classicBtn" class="menuBtn">Classic</button>
+  <h2 id="gameTitle" class="candy-text bangers">
+    <span>S</span><span>w</span><span>i</span><span>c</span><span>y</span><span>R</span><span>u</span><span>s</span><span>h</span>
+  </h2>
+    <button id="classicBtn" class="menuBtn">Classic</button>
   <button id="hurryBtn" class="menuBtn">Hurry Hurry</button>
   <button id="dizzyBtn" class="menuBtn">Dizzy Dizzy</button>
   <button id="swishBtn" class="menuBtn">Swish and Match</button>
   <button id="mechanicsBtn" class="menuBtn">Mechanics</button>
   <button id="leaderBtn" class="menuBtn" data-bs-toggle="modal" data-bs-target="#leaderboardModal">Leaderboard</button>
-  <P>Demo Version</P>
+
   
 </section>
 
@@ -1619,6 +1973,8 @@ body {
 
 <section id="gameWrapper">
    <div id="boardWrap">
+<!-- If you're reading these, you can enable testColorBomb button and its script below -->
+<!--   <button id="testColorBomb">Trigger Color Bomb</button>-->
 <div id="gameContainer" aria-hidden="true">
 <button id="backButton">❮❮</button>
 <!--  <button id="toggleMusicBtn">Music ❯❯</button> -->
@@ -1649,13 +2005,16 @@ body {
 			<div class="music-player-grid">
 			   
 			  <!-- LEFT: Dropup -->
-			  <div class="music-player-left" style="opacity:0%; pointer-events:none;">
+			  <div class="music-player-left" style="opacity:100%;">
 
 				<!-- dynamically generated songs -->
-				<i class="bi bi-volume-down"></i>
-					<input type="range" id="volumeSlider" min="0" max="100" value="70">
-					<i class="bi bi-volume-up"></i>
-				  
+				<div class="dropup">
+				  <button style="width:20px" class="btn btn-sm btn-outline-secondary dropdown-toggle"  data-bs-toggle="dropdown">	
+				  </button>
+				  <ul class="dropdown-menu" id="songList">
+				  </ul>
+				</div>
+								  
 			  </div>
 				<!-- CENTER: Music Controls -->
 			  <div class="music-player-center">      
@@ -1667,18 +2026,14 @@ body {
 			  <!-- RIGHT: Volume -->		 
 			  <div class="music-player-right" >
 					
-					
-				<div class="dropup">
-				  <button style="width:20px" class="btn btn-sm btn-outline-secondary dropdown-toggle"  data-bs-toggle="dropdown">	
-				  </button>
-				  <ul class="dropdown-menu" id="songList">
-				  </ul>
-				</div>
+					<input type="range" id="volumeSlider" min="0" max="100" value="70">
+				
 				
 			  </div>
 			</div>
 		</div>
 	</div>
+
 </div>
 </div>
 </section>
@@ -1693,6 +2048,279 @@ body {
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 </script>
 <script>
+
+document.addEventListener("DOMContentLoaded", () => {
+  const musicPlayerBox = document.getElementById("musicPlayerBox");
+  const youtubeContainer = document.getElementById("youtubePlayerContainer");
+
+  function updateIframeState() {
+    // check if YouTube player is showing (iframe inside or container visible)
+    const hasIframe = youtubeContainer.querySelector("iframe") && 
+                      youtubeContainer.style.display !== "none";
+
+    if (hasIframe) {
+      musicPlayerBox.classList.add("with-iframe");
+    } else {
+      musicPlayerBox.classList.remove("with-iframe");
+    }
+  }
+
+  // Run on load
+  updateIframeState();
+
+  // Watch for iframe changes in youtubeContainer
+  const observer = new MutationObserver(updateIframeState);
+  observer.observe(youtubeContainer, { childList: true, subtree: true, attributes: true });
+});
+
+
+
+
+// LIGHT MODE = SWICY || DARK MODE = CURIOUS
+const toggle = document.getElementById("darkModeToggle");
+const sun = document.getElementById("sunIcon");
+const moon = document.getElementById("moonIcon");
+const title = document.getElementById("gameTitle");
+
+const fadeOutDur = 500; // ms
+const fadeInDur = 500;  // ms
+const holdDur = 4000;   // ms each word stays visible
+
+let loopTimer = null; // timeout holder
+
+// Build text with letter spans + wave animation
+function setTitle(text) {
+  title.innerHTML = "";
+  [...text].forEach((letter, i) => {
+    const span = document.createElement("span");
+    if (letter === " ") {
+      span.innerHTML = "&nbsp;";
+      span.classList.add("space");
+    } else {
+      span.textContent = letter;
+      span.style.animationDelay = `${i * 0.05}s`;
+    }
+    title.appendChild(span);
+  });
+  title.classList.add("animate"); // keep glow
+}
+
+// Fade out → replace text → fade in
+function swapTitle(newText) {
+  title.classList.add("fading-out");
+  title.style.setProperty("--fade-out-dur", fadeOutDur + "ms");
+
+  setTimeout(() => {
+    title.classList.remove("fading-out");
+    setTitle(newText);
+
+    title.classList.add("fading-in");
+    title.style.setProperty("--fade-in-dur", fadeInDur + "ms");
+
+    setTimeout(() => {
+      title.classList.remove("fading-in");
+      // keep .animate so glow stays
+    }, fadeInDur);
+  }, fadeOutDur);
+}
+
+// Loop between Curious and Swicy Rush (dark mode)
+function startDarkModeLoop() {
+  let showCurious = true;
+
+  function cycle() {
+    if (showCurious) {
+      swapTitle("CURIOUS?");
+    } else {
+      swapTitle("Swicy Rush");
+    }
+    showCurious = !showCurious;
+
+    const cycleDelay = fadeOutDur + fadeInDur + holdDur;
+    loopTimer = setTimeout(cycle, cycleDelay);
+  }
+
+  cycle();
+}
+
+// Loop Swicy Rush only (light mode)
+function startLightModeLoop() {
+  function cycle() {
+    swapTitle("Swicy Rush");
+
+    const cycleDelay =  fadeInDur + holdDur;
+    loopTimer = setTimeout(cycle, cycleDelay);
+  }
+
+  cycle();
+}
+
+// Clear any active loop
+function stopLoop() {
+  if (loopTimer) {
+    clearTimeout(loopTimer);
+    loopTimer = null;
+  }
+}
+
+// Update icons + title depending on mode
+function updateIconsAndTitle() {
+  stopLoop(); // 🛑 always reset old loop first
+
+  if (document.body.classList.contains("dark-mode")) {
+    sun.classList.add("inactive");
+    moon.classList.remove("inactive");
+    startDarkModeLoop();
+  } else {
+    moon.classList.add("inactive");
+    sun.classList.remove("inactive");
+    startLightModeLoop();
+  }
+}
+
+// Init → start in light mode
+document.body.classList.remove("dark-mode");
+toggle.checked = false;
+setTitle("Swicy Rush");
+startLightModeLoop(); // run loop for light mode by default
+
+// Toggle listener
+toggle.addEventListener("change", () => {
+  document.body.classList.toggle("dark-mode");
+  updateIconsAndTitle();
+});
+
+
+/* ENABLE TEST COLOR BOMB remove / and *
+document.getElementById("testColorBomb").addEventListener("click", () => {
+  const randomVal = Math.floor(Math.random() * 8); // assuming 8 candy types
+  activateColorBomb(0, 0, randomVal);
+});*/
+/*
+let attemptIdleTimer;
+const attemptIdleLimit = 20000; // 20 seconds without a move
+const pauseModal = document.getElementById("pauseModal");
+const resumeBtn = document.getElementById("resumeBtn");
+
+function resetAttemptIdleTimer() {
+  clearTimeout(attemptIdleTimer);
+  attemptIdleTimer = setTimeout(() => {
+    pauseCurrentMode();
+    showPauseModal();
+  }, attemptIdleLimit);
+}
+
+// Show modal
+function showPauseModal() {
+  pauseModal.classList.remove("hidden");
+}
+
+// Hide modal
+function hidePauseModal() {
+  pauseModal.classList.add("hidden");
+}
+
+// Resume button → resume game + reset timer
+resumeBtn.addEventListener("click", () => {
+  hidePauseModal();
+  resumeCurrentMode();    // your resume function
+  resetAttemptIdleTimer(); // restart idle countdown
+});*/
+
+// ===== Global Vars =====
+let gameLoopId;
+let attemptIdleTimer;
+const attemptIdleLimit = 30000; // 30 seconds
+let isPaused = false;           // global pause flag
+let activeMode = null;          // track current mode (dizzy, rush, curious)
+let gameActive = false;
+
+
+const pauseModal = document.getElementById("pauseModal");
+const resumeBtn = document.getElementById("resumeBtn");
+
+// ===== Idle Timer =====
+function resetAttemptIdleTimer() {
+  clearTimeout(attemptIdleTimer);
+  console.log("⏱️ Idle timer reset (waiting", attemptIdleLimit / 1000, "seconds)");
+
+  attemptIdleTimer = setTimeout(() => {
+    if (!gameActive) return; // 👈 skip pause when in menu
+
+    console.log("⏸️ Idle limit reached → pausing game");
+    showPauseModal();
+    pauseGame();
+  }, attemptIdleLimit);
+}
+
+// ===== Pause/Resume =====
+function pauseGame() {
+  isPaused = true; // mark paused
+  cancelAnimationFrame(gameLoopId);
+}
+
+function resumeGame() {
+  isPaused = false; // mark resumed
+  gameLoopId = requestAnimationFrame(gameLoop);
+  resetAttemptIdleTimer();
+}
+
+// ===== Pause Modal Control =====
+function showPauseModal() {
+  pauseModal.classList.remove("hidden");
+}
+function hidePauseModal() {
+  pauseModal.classList.add("hidden");
+}
+
+// ===== Resume Button =====
+resumeBtn.addEventListener("click", () => {
+  console.log("▶️ Resume clicked → restarting game");
+  hidePauseModal();
+  resumeGame();
+});
+
+// ===== Game Loop =====
+function gameLoop() {
+  // update game state + draw game board
+  gameLoopId = requestAnimationFrame(gameLoop);
+}
+
+// Show/Hide modal
+function showPauseModal() {
+  pauseModal.classList.remove("hidden");
+}
+function hidePauseModal() {
+  pauseModal.classList.add("hidden");
+}
+
+// Resume button → restart loop + reset timer
+resumeBtn.addEventListener("click", () => {
+  console.log("▶️ Resume clicked → restarting loop");
+  hidePauseModal();
+  resetAttemptIdleTimer();
+  gameLoopId = requestAnimationFrame(gameLoop); // restart loop
+});
+
+function pauseGame() {
+  isPaused = true;
+  cancelAnimationFrame(gameLoopId);
+}
+
+function resumeGame() {
+  isPaused = false; // 👈 reset flag so Dizzy can spawn again
+  gameLoopId = requestAnimationFrame(gameLoop);
+  resetAttemptIdleTimer();
+}
+
+function gameLoop() {
+  // update game state
+  // draw game board
+  gameLoopId = requestAnimationFrame(gameLoop);
+}
+
+//============= GAME MECHANICS ===============
+
 
 const tabImages = {
   classic: 'images/classic.png',
@@ -1781,8 +2409,8 @@ document.getElementById("welcomeOverlay").addEventListener("click", function(e) 
   const welcomeBox = document.querySelector(".welcome-box");
 
 
-  if (welcomeBox.contains(e.target) && e.target.tagName.toLowerCase() !== "a") {
-    return;
+  if (!welcomeBox.contains(e.target)) {
+    closeWelcomeOverlay();
   }
 
 });
@@ -1871,9 +2499,6 @@ function spawnCandy() {
 }
 
 setInterval(spawnCandy, 400);
-
-
-
 
 
 function hasPossibleMoves() {
@@ -2001,7 +2626,12 @@ hurryBonusSound.volume = 1;
 const invalidMatchSound = new Audio('sounds/soundeffects/sfx3.mp3');
 const timeUpSound = new Audio('sounds/soundeffects/sfx4.mp3');
 const noMovesLeftSound = new Audio('sounds/soundeffects/sfx4.mp3');
-
+const swishSound = new Audio('sounds/soundeffects/4tilesfx.mp3');
+swishSound.volume = 1; 
+const TLSound = new Audio('sounds/soundeffects/TLtilesfx.MP3');
+TLSound.volume = 1; 
+const colorBombSound = new Audio('sounds/soundeffects/colorbomb.mp3');
+colorBombSound.volume = 1;
 
 let board = [], score = 0, firstSelection = null, dragSource = null;
 let mode = null, movesLeft = 0, timerValue = 0;
@@ -2182,9 +2812,6 @@ function updateHUD(){
 		}
 	}
   else if(mode==='Swish and Match') timerDisplay.textContent = `Moves: ${movesLeft}`;
-  else if(mode==='Dizzy Dizzy'){
-    timerDisplay.textContent = ''; 
-  }
   else {
     timerDisplay.textContent = 'Time: ∞';
   }
@@ -2192,30 +2819,30 @@ function updateHUD(){
 
 let hurryTimerStarted = false;
 
-function startTimer(){
+function startTimer() {
   clearInterval(timerInterval);
 
-  if(mode==='Hurry Hurry') {
+  if (mode === 'Hurry Hurry') {
     timerValue = 120; // 2 minutes in seconds
-    updateHUD();     
+    updateHUD();
   } else {
     timerValue = 999;
     updateHUD();
   }
 
-	timerInterval = setInterval(() => {
-	  if(mode==='Hurry Hurry'){
-		timerValue--;
-		updateHUD();
-		
-		if(timerValue <= 0){
-		  timeUpSound.currentTime = 0;
-		  timeUpSound.play(); 
-		  clearInterval(timerInterval); 		  
-		  setTimeout(() => gameOver('Time is up!'), 500);
-		}
-	  }
-	}, 1000); // 1000ms = 1 second
+  timerInterval = setInterval(() => {
+    if (mode === 'Hurry Hurry' && !isPaused) { // 👈 stop counting when paused
+      timerValue--;
+      updateHUD();
+
+      if (timerValue <= 0) {
+        timeUpSound.currentTime = 0;
+        timeUpSound.play();
+        clearInterval(timerInterval);
+        setTimeout(() => gameOver('Time is up!'), 500);
+      }
+    }
+  }, 1000); // 1000ms = 1 second
 }
 
 let isResolving = false;
@@ -2311,7 +2938,9 @@ function onTileDrop(r, c) {
 async function swapAndResolve(a, b) {
   if (isResolving) return;
   isResolving = true;
-
+  
+  resetAttemptIdleTimer();
+  
   // swap in memory, update the two tiles visually
   [board[a.r][a.c], board[b.r][b.c]] = [board[b.r][b.c], board[a.r][a.c]];
   updateTileAt(a.r, a.c);
@@ -2351,40 +2980,236 @@ async function swapAndResolve(a, b) {
   }
 }
 
-function findAllMatches(){
+let hintTimer;
+
+function resetHintTimer() {
+  clearTimeout(hintTimer);
+  hintTimer = setTimeout(() => {
+    showHint();  // only trigger if no matches found after some time
+  }, 8000); // 8s without a valid match
+}
+
+function showHint() {
+  // Remove old hints first
+  document.querySelectorAll('.tile.hint').forEach(t => t.classList.remove('hint'));
+
+  for (let r = 0; r < ROWS; r++) {
+    for (let c = 0; c < COLS; c++) {
+      // Try right swap
+      if (c < COLS - 1) {
+        [board[r][c], board[r][c+1]] = [board[r][c+1], board[r][c]];
+        if (findAllMatches().length > 0) {
+          [board[r][c], board[r][c+1]] = [board[r][c+1], board[r][c]];
+          tileDomAt(r, c)?.classList.add('hint');
+          tileDomAt(r, c+1)?.classList.add('hint');
+          return;
+        }
+        [board[r][c], board[r][c+1]] = [board[r][c+1], board[r][c]];
+      }
+
+      // Try down swap
+      if (r < ROWS - 1) {
+        [board[r][c], board[r+1][c]] = [board[r+1][c], board[r][c]];
+        if (findAllMatches().length > 0) {
+          [board[r][c], board[r+1][c]] = [board[r+1][c], board[r][c]];
+          tileDomAt(r, c)?.classList.add('hint');
+          tileDomAt(r+1, c)?.classList.add('hint');
+          return;
+        }
+        [board[r][c], board[r+1][c]] = [board[r+1][c], board[r][c]];
+      }
+    }
+  }
+}
+
+function findAllMatches() {
   const matched = [];
-  for(let r=0;r<ROWS;r++){
-    let runVal=board[r][0], runCount=1;
-    for(let c=1;c<COLS;c++){
-      if(board[r][c]===runVal) runCount++;
-      else {
-        if(runCount>=3) for(let k=0;k<runCount;k++) matched.push({r, c:c-1-k});
-        runVal=board[r][c]; runCount=1;
+
+  //  Horizontal checks
+  for (let r = 0; r < ROWS; r++) {
+    let runVal = board[r][0], runCount = 1;
+    for (let c = 1; c < COLS; c++) {
+      if (board[r][c] === runVal) {
+        runCount++;
+      } else {
+        if (runCount >= 3) {
+          if (runCount === 5) {
+            //  Found Color Bomb (5 in a row)
+            matched.push({
+              r,
+              c: c - 3,   // roughly center tile
+              type: "colorbomb",
+              val: runVal
+            });
+          } else {
+            // Normal / Row4
+            for (let k = 0; k < runCount; k++) {
+              matched.push({
+                r,
+                c: c - 1 - k,
+                type: runCount === 4 ? "row4" : "normal",
+                val: runVal
+              });
+            }
+          }
+        }
+        runVal = board[r][c];
+        runCount = 1;
       }
     }
-    if(runCount>=3) for(let k=0;k<runCount;k++) matched.push({r, c:COLS-1-k});
-  }
-  for(let c=0;c<COLS;c++){
-    let runVal=board[0][c], runCount=1;
-    for(let r=1;r<ROWS;r++){
-      if(board[r][c]===runVal) runCount++;
-      else{
-        if(runCount>=3) for(let k=0;k<runCount;k++) matched.push({r:r-1-k,c});
-        runVal=board[r][c]; runCount=1;
+
+    if (runCount >= 3) {
+      if (runCount === 5) {
+        matched.push({
+          r,
+          c: COLS - 3,
+          type: "colorbomb",
+          val: runVal
+        });
+      } else {
+        for (let k = 0; k < runCount; k++) {
+          matched.push({
+            r,
+            c: COLS - 1 - k,
+            type: runCount === 4 ? "row4" : "normal",
+            val: runVal
+          });
+        }
       }
     }
-    if(runCount>=3) for(let k=0;k<runCount;k++) matched.push({r:ROWS-1-k,c});
   }
-  const seen = new Set(), unique = [];
-  for(const m of matched){
+
+  //  Vertical checks
+  for (let c = 0; c < COLS; c++) {
+    let runVal = board[0][c], runCount = 1;
+    for (let r = 1; r < ROWS; r++) {
+      if (board[r][c] === runVal) {
+        runCount++;
+      } else {
+        if (runCount >= 3) {
+          if (runCount === 5) {
+            matched.push({
+              r: r - 3,
+              c,
+              type: "colorbomb",
+              val: runVal
+            });
+          } else {
+            for (let k = 0; k < runCount; k++) {
+              matched.push({
+                r: r - 1 - k,
+                c,
+                type: runCount === 4 ? "col4" : "normal",
+                val: runVal
+              });
+            }
+          }
+        }
+        runVal = board[r][c];
+        runCount = 1;
+      }
+    }
+
+    if (runCount >= 3) {
+      if (runCount === 5) {
+        matched.push({
+          r: ROWS - 3,
+          c,
+          type: "colorbomb",
+          val: runVal
+        });
+      } else {
+        for (let k = 0; k < runCount; k++) {
+          matched.push({
+            r: ROWS - 1 - k,
+            c,
+            type: runCount === 4 ? "col4" : "normal",
+            val: runVal
+          });
+        }
+      }
+    }
+  }
+
+  //  Deduplicate & merge types (your same logic)
+  const seen = new Map(), unique = [];
+  for (const m of matched) {
     const key = `${m.r},${m.c}`;
-    if(!seen.has(key)){seen.add(key); unique.push(m);}
+    if (!seen.has(key)) {
+      seen.set(key, { ...m });
+      unique.push(seen.get(key));
+    } else {
+      const existing = seen.get(key);
+      if (existing.type !== m.type) {
+        if (!existing.type.includes(m.type)) {
+          existing.type += "+" + m.type;
+        }
+      }
+    }
   }
+
+  //  L/T shape detection
+  const wrapped = detectLTShapes(unique);
+  wrapped.forEach(w => {
+    const key = `${w.r},${w.c}`;
+    if (seen.has(key)) {
+      seen.get(key).type = "wrapped";
+    } else {
+      seen.set(key, w);
+      unique.push(w);
+    }
+  });
+
   return unique;
 }
 
-async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
+function detectLTShapes(unique) {
+  const wrapped = [];
 
+  for (const m of unique) {
+    let hRun = unique.filter(t => t.r === m.r && t.val === m.val);
+    let vRun = unique.filter(t => t.c === m.c && t.val === m.val);
+
+    if (hRun.length >= 3 && vRun.length >= 3) {
+      wrapped.push({ r: m.r, c: m.c, type: "wrapped", val: m.val });
+    }
+  }
+
+  return wrapped;
+}
+
+function spawnFloatingMove(r, c, amount = 1) {
+  try {
+    const tile = tileDomAt(r, c);
+    if (!tile) return; // nothing to attach to
+
+    const gameRect = gameContainer.getBoundingClientRect();
+    const tileRect = tile.getBoundingClientRect();
+
+    const el = document.createElement('div');
+    el.className = 'floating-move';
+    el.textContent = `+${amount} Move${amount > 1 ? 's' : ''}`;
+
+    // position relative to gameContainer
+    el.style.position = 'absolute';
+    el.style.left = `${tileRect.left - gameRect.left + tileRect.width / 2}px`;
+    el.style.top = `${tileRect.top - gameRect.top}px`;
+    el.style.pointerEvents = 'none';
+    el.style.zIndex = 9999;
+
+    gameContainer.appendChild(el);
+
+    // remove after animation
+    setTimeout(() => {
+      try { el.remove(); } catch (e) {}
+    }, 1000);
+  } catch (err) {
+    console.error('spawnFloatingMove error', err);
+  }
+}
+try { spawnFloatingMove(m.r, m.c); } catch(e){ console.error(e); }
+
+async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
   if (isResolving === false) isResolving = true;
 
   let matches = findAllMatches();
@@ -2392,38 +3217,184 @@ async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
     isResolving = false;
     return;
   }
+  resetHintTimer();
 
- 
+  // 🔹 Handle clears (mark tiles null + play animations)
+  for (const m of matches) {
+    if (m.type.includes("row4")) {
+      swishSound.currentTime = 0;
+      swishSound.play();
+
+      for (let cc = 0; cc < COLS; cc++) {
+        const t = tileDomAt(m.r, cc);
+        if (t) t.classList.add("row-clearing");
+
+        if (board[m.r][cc] != null) {
+          if (mode === 'Swish and Match' && board[m.r][cc] === 9) {
+            movesLeft++;
+            bonusSound.currentTime = 0;
+            bonusSound.play();
+            spawnFloatingMove(m.r, cc);
+          } else {
+            score += 15;
+            spawnFloatingScore(m.r, cc, 15);
+          }
+          board[m.r][cc] = null;
+        }
+      }
+    }
+
+    if (m.type.includes("col4")) {
+      swishSound.currentTime = 0;
+      swishSound.play();
+
+      for (let rr = 0; rr < ROWS; rr++) {
+        const t = tileDomAt(rr, m.c);
+        if (t) t.classList.add("col-clearing");
+
+        if (board[rr][m.c] != null) {
+          if (mode === 'Swish and Match' && board[rr][m.c] === 9) {
+            movesLeft++;
+            bonusSound.currentTime = 0;
+            bonusSound.play();
+            spawnFloatingMove(rr, m.c);
+          } else {
+            score += 15;
+            spawnFloatingScore(rr, m.c, 15);
+          }
+          board[rr][m.c] = null;
+        }
+      }
+    }
+
+    if (m.type === "wrapped") {
+      swishSound.currentTime = 0;
+      swishSound.play();
+      for (let rr = m.r - 1; rr <= m.r + 1; rr++) {
+        for (let cc = m.c - 1; cc <= m.c + 1; cc++) {
+          if (rr >= 0 && rr < ROWS && cc >= 0 && cc < COLS) {
+            if (board[rr][cc] !== null) {
+              if (mode === 'Swish and Match' && board[rr][cc] === 9) {
+                movesLeft++;
+                bonusSound.currentTime = 0;
+                bonusSound.play();
+                spawnFloatingMove(rr, cc);
+              } else {
+                score += 15;
+                spawnFloatingScore(rr, cc, 15);
+              }
+
+              board[rr][cc] = null;
+
+              const t = tileDomAt(rr, cc);
+              if (t) t.classList.add("wrapped-clearing");
+            }
+          }
+        }
+      }
+    }
+
+    if (m.type === "colorbomb") {
+      const targetColor = m.val;  
+      if (!targetColor) continue;
+
+      colorBombSound.currentTime = 0;
+      colorBombSound.play();
+
+      // Every candy of this color acts like a striped clear
+      for (let rr = 0; rr < ROWS; rr++) {
+        for (let cc = 0; cc < COLS; cc++) {
+          if (board[rr][cc] === targetColor) {
+            if (Math.random() < 0.5) {
+              // Row clear
+              swishSound.currentTime = 0;
+              swishSound.play();
+
+              const triggerTile = tileDomAt(rr, cc);
+              if (triggerTile) triggerTile.classList.add("row-clearing");
+
+              for (let x = 0; x < COLS; x++) {
+                const t = tileDomAt(rr, x);
+                if (t) t.classList.add("matching");
+                if (board[rr][x] != null) {
+                  if (mode === 'Swish and Match' && board[rr][x] === 9) {
+                    movesLeft++;
+                    bonusSound.currentTime = 0;
+                    bonusSound.play();
+                    spawnFloatingMove(rr, x);
+                  } else {
+                    score += 20;
+                    spawnFloatingScore(rr, x, 20);
+                  }
+                  board[rr][x] = null;
+                }
+              }
+            } else {
+              // Column clear
+              swishSound.currentTime = 0;
+              swishSound.play();
+
+              const triggerTile = tileDomAt(rr, cc);
+              if (triggerTile) triggerTile.classList.add("col-clearing");
+
+              for (let y = 0; y < ROWS; y++) {
+                const t = tileDomAt(y, cc);
+                if (t) t.classList.add("matching");
+                if (board[y][cc] != null) {
+                  if (mode === 'Swish and Match' && board[y][cc] === 9) {
+                    movesLeft++;
+                    bonusSound.currentTime = 0;
+                    bonusSound.play();
+                    spawnFloatingMove(y, cc);
+                  } else {
+                    score += 10;
+                    spawnFloatingScore(y, cc, 10);
+                  }
+                  board[y][cc] = null;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    if (m.type === "normal") {
+      const t = tileDomAt(m.r, m.c);
+      if (t) t.classList.add("matching");
+
+      if (board[m.r][m.c] != null) {
+        if (mode === 'Swish and Match' && board[m.r][m.c] === 9) {
+          movesLeft++;
+          bonusSound.currentTime = 0;
+          bonusSound.play();
+          spawnFloatingMove(m.r, m.c);
+        } else {
+          score += 10;
+          spawnFloatingScore(m.r, m.c, 10);
+        }
+        board[m.r][m.c] = null;
+      }
+    }
+  }
+
+  // 🔹 Start cascade immediately (don’t wait for pop animations)
+  collapseAndRefill();
+
+  // Meanwhile, let pop animations finish
   const tiles = [];
   matches.forEach(pos => {
     const t = tileDomAt(pos.r, pos.c);
     if (t) {
       t.dataset.busy = 'true';
-      t.classList.add('matching');
-      tiles.push({el: t, pos});
+      tiles.push({ el: t, pos });
     }
   });
 
+  await Promise.all(tiles.map(t => awaitAnimationEnd(t.el, 'matchPop').catch(() => {})));
 
-  await Promise.all(tiles.map(t => awaitAnimationEnd(t.el, 'matchPop').catch(()=>{})));
-
- 
-  const matchedValues = [];
+  // Hurry Hurry bonus logic
   let suppressMatchSound = false;
-
-  matches.forEach(pos => {
- 
-    if (board[pos.r][pos.c] == null) return;
-    const val = board[pos.r][pos.c];
-    matchedValues.push(val);
-
-    score += 10;
-    spawnFloatingScore(pos.r, pos.c, 10);
-
-    board[pos.r][pos.c] = null;
-  });
-
-  // Hurry Hurry time bonus logic (unchanged)
   if (mode === 'Hurry Hurry') {
     const scoreBonus = Math.floor(score / 150) * 10;
     const previousBonus = Math.floor((score - matches.length * 10) / 150) * 10;
@@ -2436,20 +3407,20 @@ async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
     }
   }
 
-  if (matches.length > 0 && !suppressMatchSound) {
+  const onlyNormalMatches = matches.every(m => m.type === "normal");
+
+  if (matches.length > 0 && !suppressMatchSound && onlyNormalMatches) {
     matchSound.currentTime = 0;
     matchSound.play();
   }
 
-  // Swish & Move handling (same logic)
+  // Swish & Move mode
   if (mode === 'Swish and Match') {
-    const bonusCount = matchedValues.filter(v => v === 9).length;
-    if (bonusCount > 0) {
-      movesLeft += bonusCount;
-      bonusSound.currentTime = 0;
-      bonusSound.play();
-    } else if (isPlayerMove) {
-      movesLeft--;
+    if (isPlayerMove) {
+      const matchedBonus = matches.some(m => m.val === 9);
+      if (!matchedBonus) {
+        movesLeft--;
+      }
     }
     updateHUD();
     if (movesLeft <= 0) {
@@ -2461,27 +3432,27 @@ async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
     updateHUD();
   }
 
- 
-  collapseAndRefill(); // 
-
-
+  // 🔹 Short wait so cascade animations can show
   await new Promise(r => setTimeout(r, 140));
 
-  // recursive resolution
+  // Recursively resolve
   await resolveMatchesAndCascade(false, false);
-
 
   if (!hasPossibleMoves()) {
     showShuffleOverlay(1200);
     setTimeout(() => animateShuffleAndResolve(), 1300);
   }
 
-
+  // Cleanup animations
   const allTiles = Array.from(innerBoard.querySelectorAll('.tile'));
-  allTiles.forEach(t => { if (t.dataset.busy) delete t.dataset.busy; t.classList.remove('matching'); });
+  allTiles.forEach(t => {
+    if (t.dataset.busy) delete t.dataset.busy;
+    t.classList.remove('matching', 'row-clearing', 'col-clearing', 'wrapped-clearing');
+  });
 
   isResolving = false;
 }
+
 //Cascade Helper
 
 function recordScore() {
@@ -2501,23 +3472,144 @@ function gameOver(reason) {
   
 }
 
+function activateColorBomb(r, c, targetVal) {
+  if (!targetVal) return;
 
-function collapseAndRefill(){
-  for(let c=0;c<COLS;c++){
-    const stack=[];
-    for(let r=ROWS-1;r>=0;r--) if(board[r][c]!=null) stack.push(board[r][c]);
-    while(stack.length<ROWS) stack.push(randomCandyValue());
-    for(let r=ROWS-1,i=0;r>=0;r--,i++) board[r][c]=stack[i];
+  colorBombSound.currentTime = 0;
+  colorBombSound.play();
+
+  // Every candy of this color acts like a striped clear
+  for (let rr = 0; rr < ROWS; rr++) {
+    for (let cc = 0; cc < COLS; cc++) {
+      if (board[rr][cc] === targetVal) {
+        if (Math.random() < 0.5) {
+          //  Row clear
+          swishSound.currentTime = 0;
+          swishSound.play();
+
+          const triggerTile = tileDomAt(rr, cc);
+          if (triggerTile) triggerTile.classList.add("row-clearing");
+
+          for (let x = 0; x < COLS; x++) {
+            const t = tileDomAt(rr, x);
+            if (t) t.classList.add("matching");
+            if (board[rr][x] != null) {
+              board[rr][x] = null;
+              score += 10;
+              spawnFloatingScore(rr, x, 10);
+            }
+          }
+        } else {
+          //  Column clear
+          swishSound.currentTime = 0;
+          swishSound.play();
+
+          const triggerTile = tileDomAt(rr, cc);
+          if (triggerTile) triggerTile.classList.add("col-clearing");
+
+          for (let y = 0; y < ROWS; y++) {
+            const t = tileDomAt(y, cc);
+            if (t) t.classList.add("matching");
+            if (board[y][cc] != null) {
+              board[y][cc] = null;
+              score += 10;
+              spawnFloatingScore(y, cc, 10);
+            }
+          }
+        }
+      }
+    }
   }
-  renderWholeBoard();
+
+  // Collapse board after a short delay
+  setTimeout(() => collapseAndRefill(), 300);
 }
 
-function startDizzy() {
-  clearInterval(dizzyInterval);
-  dizzyInterval = setInterval(async () => {
-    let anyChange = false;
 
-    // collect changes so we can await them if needed
+function collapseAndRefill() {
+  const missingPerCol = Array(COLS).fill(0);
+  const movedTiles = [];
+
+  for (let c = 0; c < COLS; c++) {
+    const stack = [];
+    for (let r = ROWS - 1; r >= 0; r--) {
+      if (board[r][c] != null) {
+        stack.push(board[r][c]);
+      }
+    }
+
+    // Count missing
+    const missing = ROWS - stack.length;
+    missingPerCol[c] = missing;
+
+    // Add new random candies
+    for (let i = 0; i < missing; i++) {
+      stack.push(randomCandyValue());
+    }
+
+    // Place back into board
+    for (let r = ROWS - 1, i = 0; r >= 0; r--, i++) {
+      const oldVal = board[r][c];
+      const newVal = stack[i];
+      if (oldVal !== newVal && oldVal != null) {
+        movedTiles.push({ r, c });
+      }
+      board[r][c] = newVal;
+    }
+  }
+
+  // Redraw everything
+  renderWholeBoard();
+
+  // Animate new spawns
+  for (let c = 0; c < COLS; c++) {
+    for (let r = 0; r < missingPerCol[c]; r++) {
+      const t = tileDomAt(r, c);
+      if (!t) continue;
+      t.classList.add("spawning");
+      t.addEventListener("animationend", () => {
+        t.classList.remove("spawning");
+      }, { once: true });
+    }
+  }
+
+  // Animate falling with stagger
+for (const tile of movedTiles) {
+  const t = tileDomAt(tile.r, tile.c);
+  if (!t) continue;
+
+  // reset animation
+  t.classList.remove("falling");
+  t.style.animation = "none";
+  void t.offsetWidth;
+  t.style.animation = "";
+
+  // compute how far this tile actually fell
+  const fallDistance = (missingPerCol[tile.c] * 50) + "%";
+  t.style.setProperty("--fall-distance", fallDistance);
+
+  // add falling with stagger
+  t.classList.add("falling");
+  t.style.animationDelay = `${(ROWS - tile.r) * 0.00}s`;
+
+  t.addEventListener("animationend", () => {
+    t.classList.remove("falling");
+    t.style.animationDelay = "";
+    t.style.removeProperty("--fall-distance");
+  }, { once: true });
+}}
+
+function startDizzy() {
+  console.log("🎲 Dizzy spawner started");
+  clearInterval(dizzyInterval); // prevent stacking
+
+  dizzyInterval = setInterval(async () => {
+    // 🔹 Skip spawning if paused or modal visible
+    if (isPaused || !pauseModal.classList.contains("hidden")) {
+      return;
+    }
+
+    let anyChange = false;
     const changePromises = [];
 
     for (let r = 0; r < ROWS; r++) {
@@ -2527,28 +3619,32 @@ function startDizzy() {
           if (!t) continue;
 
           // skip if tile is busy (matching, shaking, etc.)
-          if (t.dataset.busy === 'true' || t.classList.contains('shake') || t.classList.contains('matching')) {
+          if (
+            t.dataset.busy === "true" ||
+            t.classList.contains("shake") ||
+            t.classList.contains("matching")
+          ) {
             continue;
           }
 
           anyChange = true;
-          t.dataset.busy = 'true';
-          t.classList.add('dizzyChange');
+          t.dataset.busy = "true";
+          t.classList.add("dizzyChange");
 
-          // capture r, c for closure
-          (function(rr, cc, tileEl) {
+          (function (rr, cc, tileEl) {
             const p = (async () => {
-              await awaitAnimationEnd(tileEl, 'dizzyPop').catch(()=>{});
-              // after pop, set new board value and update image, fade-in
+              await awaitAnimationEnd(tileEl, "dizzyPop").catch(() => {});
               const newVal = randomCandyValue();
               board[rr][cc] = newVal;
               updateTileAt(rr, cc);
 
-              tileEl.classList.remove('dizzyChange');
-              tileEl.classList.add('fading-in');
+              tileEl.classList.remove("dizzyChange");
+              tileEl.classList.add("fading-in");
 
-              await awaitAnimationEnd(tileEl, 'fadeInGlow').catch(()=>{}); // optional if you have named keyframe — otherwise wait small timeout
-              setTimeout(() => { tileEl.classList.remove('fading-in'); }, 600);
+              await awaitAnimationEnd(tileEl, "fadeInGlow").catch(() => {});
+              setTimeout(() => {
+                tileEl.classList.remove("fading-in");
+              }, 600);
 
               delete tileEl.dataset.busy;
             })();
@@ -2558,14 +3654,11 @@ function startDizzy() {
       }
     }
 
-  
     if (anyChange) {
       try {
         await Promise.all(changePromises);
-      } catch(e) { /* ignore */ }
- 
-      await new Promise(r => setTimeout(r, 80));
-  
+      } catch (e) {}
+      await new Promise((r) => setTimeout(r, 80));
       await resolveMatchesAndCascade(false, false);
     }
   }, 2000);
@@ -2579,6 +3672,10 @@ function showMenu(){
   
   clearInterval(timerInterval);
   clearInterval(dizzyInterval);
+  
+  gameActive = false;
+  hidePauseModal();  // just in case modal was open
+  clearTimeout(attemptIdleTimer);
   
   const timerDisplay = document.getElementById('timerDisplay');
   if (timerDisplay) {
@@ -2610,7 +3707,10 @@ function startGame(selectedMode){
   mainMenu.style.display='none';
   gameContainer.style.display='flex';
   musicPlayerBox.style.display='flex';
-  
+  gameActive = true;
+  gameLoop();
+  resetAttemptIdleTimer();
+    
   createBoardInitial();
   updateHUD();
   

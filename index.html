@@ -2860,7 +2860,7 @@ function awaitAnimationEnd(el, expectedName = null) {
     setTimeout(() => {
       try { el.removeEventListener('animationend', onEnd); } catch(e) {}
       resolve();
-    }, 900); 
+    }, 600); 
   });
 }
 
@@ -3209,51 +3209,6 @@ function spawnFloatingMove(r, c, amount = 1) {
 }
 try { spawnFloatingMove(m.r, m.c); } catch(e){ console.error(e); }
 
-// Sound Manager to prevent spammy overlaps
-const SoundManager = {
-  lastPlayTime: {},
-
-  play(audio, volume = 1, minInterval = 100) {
-    const now = performance.now();
-    const key = audio.src;
-
-    if (this.lastPlayTime[key] && now - this.lastPlayTime[key] < minInterval) {
-      return; // skip if too soon
-    }
-
-    this.lastPlayTime[key] = now;
-
-    try {
-      const s = audio.cloneNode();
-      s.volume = volume;
-      s.currentTime = 0;
-      s.play().catch(() => {});
-    } catch (e) {
-      try {
-        audio.volume = volume;
-        audio.currentTime = 0;
-        audio.play().catch(() => {});
-      } catch(_) {}
-    }
-  }
-};
-
-// Lightweight helper for rapid-fire sounds (normal matches)
-function playSound(audio, volume = 1) {
-  try {
-    const s = audio.cloneNode();
-    s.volume = volume;
-    s.currentTime = 0;
-    s.play().catch(() => {});
-  } catch (e) {
-    try { 
-      audio.volume = volume;
-      audio.currentTime = 0; 
-      audio.play().catch(() => {}); 
-    } catch(_) {}
-  }
-}
-
 
 async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
   if (isResolving === false) isResolving = true;
@@ -3265,10 +3220,11 @@ async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
   }
   resetHintTimer();
 
-  // 🔹 Handle clears (mark tiles null + play animations)
+  // 🔹Handle clears
   for (const m of matches) {
     if (m.type.includes("row4")) {
-      SoundManager.play(swishSound, 0.9, 200);
+      swishSound.currentTime = 0;
+      swishSound.play();
 
       for (let cc = 0; cc < COLS; cc++) {
         const t = tileDomAt(m.r, cc);
@@ -3277,11 +3233,12 @@ async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
         if (board[m.r][cc] != null) {
           if (mode === 'Swish and Match' && board[m.r][cc] === 9) {
             movesLeft++;
-            SoundManager.play(bonusSound, 1.0, 0);
+            bonusSound.currentTime = 0;
+            bonusSound.play();
             spawnFloatingMove(m.r, cc);
           } else {
-            score += 15;
-            spawnFloatingScore(m.r, cc, 15);
+            score += 10;
+            spawnFloatingScore(m.r, cc, 10);
           }
           board[m.r][cc] = null;
         }
@@ -3289,7 +3246,8 @@ async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
     }
 
     if (m.type.includes("col4")) {
-      SoundManager.play(swishSound, 0.9, 200);
+      swishSound.currentTime = 0;
+      swishSound.play();
 
       for (let rr = 0; rr < ROWS; rr++) {
         const t = tileDomAt(rr, m.c);
@@ -3298,11 +3256,12 @@ async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
         if (board[rr][m.c] != null) {
           if (mode === 'Swish and Match' && board[rr][m.c] === 9) {
             movesLeft++;
-            SoundManager.play(bonusSound, 1.0, 0);
+            bonusSound.currentTime = 0;
+            bonusSound.play();
             spawnFloatingMove(rr, m.c);
           } else {
-            score += 15;
-            spawnFloatingScore(rr, m.c, 15);
+            score += 10;
+            spawnFloatingScore(rr, m.c, 10);
           }
           board[rr][m.c] = null;
         }
@@ -3310,19 +3269,20 @@ async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
     }
 
     if (m.type === "wrapped") {
-      SoundManager.play(TLSound, 1.0, 250);
-
+      swishSound.currentTime = 0;
+      swishSound.play();
       for (let rr = m.r - 1; rr <= m.r + 1; rr++) {
         for (let cc = m.c - 1; cc <= m.c + 1; cc++) {
           if (rr >= 0 && rr < ROWS && cc >= 0 && cc < COLS) {
             if (board[rr][cc] !== null) {
               if (mode === 'Swish and Match' && board[rr][cc] === 9) {
                 movesLeft++;
-                SoundManager.play(bonusSound, 1.0, 0);
+                bonusSound.currentTime = 0;
+                bonusSound.play();
                 spawnFloatingMove(rr, cc);
               } else {
-                score += 15;
-                spawnFloatingScore(rr, cc, 15);
+                score += 10;
+                spawnFloatingScore(rr, cc, 10);
               }
 
               board[rr][cc] = null;
@@ -3336,16 +3296,20 @@ async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
     }
 
     if (m.type === "colorbomb") {
-      SoundManager.play(colorBombSound, 1.0, 500);
-
       const targetColor = m.val;  
       if (!targetColor) continue;
 
+      colorBombSound.currentTime = 0;
+      colorBombSound.play();
+
+      // Every candy of this color acts like a striped clear
       for (let rr = 0; rr < ROWS; rr++) {
         for (let cc = 0; cc < COLS; cc++) {
           if (board[rr][cc] === targetColor) {
             if (Math.random() < 0.5) {
-              SoundManager.play(swishSound, 0.9, 200);
+              // Row clear
+              swishSound.currentTime = 0;
+              swishSound.play();
 
               const triggerTile = tileDomAt(rr, cc);
               if (triggerTile) triggerTile.classList.add("row-clearing");
@@ -3356,17 +3320,20 @@ async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
                 if (board[rr][x] != null) {
                   if (mode === 'Swish and Match' && board[rr][x] === 9) {
                     movesLeft++;
-                    SoundManager.play(bonusSound, 1.0, 0);
+                    bonusSound.currentTime = 0;
+                    bonusSound.play();
                     spawnFloatingMove(rr, x);
                   } else {
-                    score += 20;
-                    spawnFloatingScore(rr, x, 20);
+                    score += 10;
+                    spawnFloatingScore(rr, x, 10);
                   }
                   board[rr][x] = null;
                 }
               }
             } else {
-              SoundManager.play(swishSound, 0.9, 200);
+              // Column clear
+              swishSound.currentTime = 0;
+              swishSound.play();
 
               const triggerTile = tileDomAt(rr, cc);
               if (triggerTile) triggerTile.classList.add("col-clearing");
@@ -3377,7 +3344,8 @@ async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
                 if (board[y][cc] != null) {
                   if (mode === 'Swish and Match' && board[y][cc] === 9) {
                     movesLeft++;
-                    SoundManager.play(bonusSound, 1.0, 0);
+                    bonusSound.currentTime = 0;
+                    bonusSound.play();
                     spawnFloatingMove(y, cc);
                   } else {
                     score += 10;
@@ -3399,22 +3367,19 @@ async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
       if (board[m.r][m.c] != null) {
         if (mode === 'Swish and Match' && board[m.r][m.c] === 9) {
           movesLeft++;
-          SoundManager.play(bonusSound, 0.6, 200);
+          bonusSound.currentTime = 0;
+          bonusSound.play();
           spawnFloatingMove(m.r, m.c);
         } else {
           score += 10;
           spawnFloatingScore(m.r, m.c, 10);
-          playSound(matchSound, 0.5); // ✅ per-tile pops rapid
         }
         board[m.r][m.c] = null;
       }
     }
   }
 
-  // 🔹 Start cascade immediately
-  collapseAndRefill();
-
-  // Meanwhile, let pop animations finish
+  // Animate matched tiles
   const tiles = [];
   matches.forEach(pos => {
     const t = tileDomAt(pos.r, pos.c);
@@ -3427,14 +3392,24 @@ async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
   await Promise.all(tiles.map(t => awaitAnimationEnd(t.el, 'matchPop').catch(() => {})));
 
   // Hurry Hurry bonus logic
+  let suppressMatchSound = false;
   if (mode === 'Hurry Hurry') {
     const scoreBonus = Math.floor(score / 150) * 10;
     const previousBonus = Math.floor((score - matches.length * 10) / 150) * 10;
     const addedTime = scoreBonus - previousBonus;
     if (addedTime > 0) {
       timerValue += addedTime;
-      SoundManager.play(hurryBonusSound, 1.0, 0);
+      hurryBonusSound.currentTime = 0;
+      hurryBonusSound.play();
+      suppressMatchSound = true;
     }
+  }
+
+  const onlyNormalMatches = matches.every(m => m.type === "normal");
+
+  if (matches.length > 0 && !suppressMatchSound && onlyNormalMatches) {
+    matchSound.currentTime = 0;
+    matchSound.play();
   }
 
   // Swish & Move mode
@@ -3447,15 +3422,17 @@ async function resolveMatchesAndCascade(initialFlag, isPlayerMove = false) {
     }
     updateHUD();
     if (movesLeft <= 0) {
-      SoundManager.play(noMovesLeftSound, 1.0, 0);
+      noMovesLeftSound.currentTime = 0;
+      noMovesLeftSound.play();
       setTimeout(() => gameOver('No Move Left!'), 500);
     }
   } else {
     updateHUD();
   }
 
-  // 🔹 Short wait so cascade animations can show
-  await new Promise(r => setTimeout(r, 140));
+  // Cascade & refill
+  collapseAndRefill();
+  await new Promise(r => setTimeout(r, 0));
 
   // Recursively resolve
   await resolveMatchesAndCascade(false, false);
